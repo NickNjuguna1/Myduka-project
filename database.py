@@ -53,34 +53,34 @@ curr = connect.cursor()
 
 
 # fetch data
-# def fetch_data(table_name):
-#     curr.execute(f'select * from {table_name}')
-#     data = curr.fetchall()
-#     return data
+def fetch_data(table_name):
+    curr.execute(f'select * from {table_name}')
+    data = curr.fetchall()
+    return data
 
 
-# products = fetch_data('products')
-# print('My Products')
-# print(products)
-# stock = fetch_data('stock')
-# print('My stock')
-# print(stock)
-# sales = fetch_data('sales')
-# print('My Sales')
-# print(sales)
+products = fetch_data('products')
+print('My Products')
+print(products)
+stock = fetch_data('stock')
+print('My stock')
+print(stock)
+sales = fetch_data('sales')
+print('My Sales')
+print(sales)
 
 # Insert Products
-# def insert_products(values):
-#     query = "insert into products(name, buying_price, selling_price) values (%s, %s, %s)"
-#     curr.execute(query, values)
-#     connect.commit()
+def insert_products(values):
+    query = "insert into products(name, buying_price, selling_price) values (%s, %s, %s)"
+    curr.execute(query, values)
+    connect.commit()
 
-# new_product = ('Mango', 20, 40)
-# insert_products(new_product)
+new_product = ('Mango', 20, 40)
+insert_products(new_product)
 
-# products=fetch_data('products')
-# print('My Products')
-# print(products)
+products=fetch_data('products')
+print('My Products')
+print(products)
 
 
 def insert_stock(values):
