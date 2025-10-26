@@ -91,6 +91,12 @@ def insert_stock(values):
 # new_stock = (43, 6, 59)
 # insert_stock(new_stock)
 # # the above insert_stock calls the function
+# def products_sale():
+#     query=
+
+
+
+
 
 # stock = fetch_data('stock')
 # print('My new stock')
