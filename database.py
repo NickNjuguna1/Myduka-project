@@ -59,15 +59,15 @@ def fetch_data(table_name):
     return data
 
 
-products = fetch_data('products')
-print('My Products')
-print(products)
-stock = fetch_data('stock')
-print('My stock')
-print(stock)
+# products = fetch_data('products')
+# print('My Products')
+# print(products)
+# stock = fetch_data('stock')
+# print('My stock')
+# print(stock)
 sales = fetch_data('sales')
-print('My Sales')
-print(sales)
+# print('My Sales')
+# print(sales)
 
 # Insert Products
 def insert_products(values):
@@ -76,11 +76,11 @@ def insert_products(values):
     connect.commit()
 
 new_product = ('Mango', 20, 40)
-insert_products(new_product)
+# insert_products(new_product)
 
 products=fetch_data('products')
-print('My Products')
-print(products)
+# print('My Products')
+# print(products)
 
 
 def insert_stock(values):
@@ -111,7 +111,7 @@ def product_profit():
     return profit
 
 myprofits=product_profit()
-print( f'My product profit is {myprofits}')
+# print( f'My product profit is {myprofits}')
 
 def sales_sum():
     query='select sum(products.selling_price*sales.quantity) ' \
@@ -121,4 +121,4 @@ def sales_sum():
     return sum
 
 my_sum=sales_sum()
-print(f'My sum is {my_sum}')
+# print(f'My sum is {my_sum}')

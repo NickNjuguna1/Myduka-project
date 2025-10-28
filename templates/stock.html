@@ -10,17 +10,93 @@
 </head>
 
 <body>
-    <h1>My Stock</h1>
-    <p>{{my_stock}}</p>
-    <table>
-        <tr>
-            <th>id</th>
-            <th>product_id</th>
-            <th>stock_quantity</th>
-        </tr>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-between">
+        <div class="container-fluid bg-warning">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" role="button" aria-expanded="false">
+                            Id
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" role="button" aria-expanded="false">
+                            Product name
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link " href="#" role="button" aria-expanded="false">
+                            Stock Qunatity
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <h1 class="container">My Stock</h1>
+    <!-- Button trigger modal -->
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add new stock
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Stock</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Product name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter product name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Stock quantity</label>
+                        <input type="number" class="form-control" id="Buying Price" placeholder="Enter remaining stock">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div> <br> <br>
+    <table class="table table-secondary table-striped-columns container">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>product_id</th>
+                <th>stock_quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in my_stock %}
+            <tr>
+                <td>{{stock[0]}}</td>
+                <td>{{stock[1]}}</td>
+                <td>{{stock[2]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    </table>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+        integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
         crossorigin="anonymous"></script>
 </body>
 

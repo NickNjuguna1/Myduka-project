@@ -24,4 +24,4 @@ def stock():
     stock=fetch_data('stock')
     return render_template ('stock.html', my_stock=stock)
 
-app.run()
+app.run(debug=True)
