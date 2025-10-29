@@ -51,13 +51,11 @@ curr = connect.cursor()
 # mysales=fetchsales()
 # print(mysales)
 
-
 # fetch data
 def fetch_data(table_name):
     curr.execute(f'select * from {table_name}')
     data = curr.fetchall()
     return data
-
 
 # products = fetch_data('products')
 # print('My Products')
@@ -82,6 +80,14 @@ products=fetch_data('products')
 # print('My Products')
 # print(products)
 
+def insert_sales(values):
+    query='insert into sales(product_id, quantity, created_at) values (%s, %s, %s)'
+    curr.execute(query, values)
+    connect.commit()
+# new_sales=(2,5)
+# insert_sales(new_sale)
+# sales = fetch_data('sales')
+# print(sales)
 
 def insert_stock(values):
     query = "insert into stock(id, product_id, stock_quantity) values (%s, %s, %s)"
