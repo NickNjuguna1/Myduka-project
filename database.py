@@ -81,7 +81,7 @@ products=fetch_data('products')
 # print(products)
 
 def insert_sales(values):
-    query='insert into sales(product_id, quantity, created_at) values (%s, %s, %s)'
+    query='insert into sales(product_id, quantity, created_at) values (%s, %s, now())'
     curr.execute(query, values)
     connect.commit()
 # new_sales=(2,5)
