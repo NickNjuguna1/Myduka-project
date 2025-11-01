@@ -44,7 +44,7 @@
         <h1 class="container">My Dashboard</h1>
 
         <!-- Bar Graph -->
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-6">
                     <canvas id="bar-chart" width="800" height="450"></canvas>
@@ -53,12 +53,8 @@
                     <canvas id="line-chart" width="800" height="450"></canvas>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-6">
-                    <canvas id="bar-chart" width="800" height="450"></canvas>
-                </div>
-            </div>
         </div>
+
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -68,27 +64,29 @@
             integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
             crossorigin="anonymous"></script>
         <script>
+            // Bar chart
             new Chart(document.getElementById("bar-chart"), {
                 type: 'bar',
                 data: {
-                    labels: {{ product_names | safe}},
-                datasets: [
-                {
-                    label: "Product Name",
-                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
-                    data: {{ product_profits | safe}}
-                    }
-            ]
-            },
+                    labels: {{product_names | safe}},
+                    datasets: [
+                        {
+                            label: "Product Name",
+                            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                            data: {{product_profits | safe}}
+                        }
+                    ]
+                },
                 options: {
-                legend: { display: false },
-                title: {
-                    display: true,
-                    text: 'Profit per Product'
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'Profit per Product'
+                    }
                 }
-            }
-        });
+            });
 
+            // Line Chart
             new Chart(document.getElementById("line-chart"), {
                 type: 'line',
                 data: {
@@ -129,8 +127,8 @@
                 }
             });
 
-            
-            
+
+
 
         </script>
         <script>

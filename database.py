@@ -52,10 +52,13 @@ curr = connect.cursor()
 # print(mysales)
 
 # fetch data
+
+
 def fetch_data(table_name):
     curr.execute(f'select * from {table_name}')
     data = curr.fetchall()
     return data
+
 
 # products = fetch_data('products')
 # print('My Products')
@@ -68,20 +71,24 @@ sales = fetch_data('sales')
 # print(sales)
 
 # Insert Products
+
+
 def insert_products(values):
-    query = "insert into products(name, buying_price, selling_price) values (%s, %s, %s)"
+    query = "insert into products(name, buying_price, selling_price) values (%s, %s, %s);"
     curr.execute(query, values)
     connect.commit()
+
 
 new_product = ('Mango', 20, 40)
 # insert_products(new_product)
 
-products=fetch_data('products')
+products = fetch_data('products')
 # print('My Products')
 # print(products)
 
+
 def insert_sales(values):
-    query='insert into sales(product_id, quantity, created_at) values (%s, %s, now())'
+    query = 'insert into sales(product_id, quantity, created_at) values (%s, %s, now());'
     curr.execute(query, values)
     connect.commit()
 # new_sales=(2,5)
@@ -89,8 +96,9 @@ def insert_sales(values):
 # sales = fetch_data('sales')
 # print(sales)
 
+
 def insert_stock(values):
-    query = "insert into stock(id, product_id, stock_quantity) values (%s, %s, %s)"
+    query = "insert into stock(id, product_id, stock_quantity) values (%s, %s, %s);"
     curr.execute(query, values)
     connect.commit()
 
@@ -105,23 +113,26 @@ def insert_stock(values):
 # print('My new stock')
 # print(stock)
 
-# Profit per Product
+# Profit per Product(profit=(selling price - buying price)*quantity)
 def product_profit():
-    query = 'select * from sales inner join products on ' \
-    'sales.product_id=products.product_id;'
+    query = 'select p.name, p.product_id, sum((selling_price-buying_price)*s.quantity) as profit ' \
+    'from sales as s inner join products as p on s.product_id = p.product_id group by p.name, p.product_id'
     curr.execute(query)
-    profit=curr.fetchall()
+    profit = curr.fetchall()
     return profit
 
-myprofits=product_profit()
+
+myprofits = product_profit()
 # print( f'My product profit is {myprofits}')
 
+
 def sales_sum():
-    query='select sum(products.selling_price*sales.quantity) ' \
-    'from sales inner join products on sales.product_id=products.product_id;'
+    query = 'select sum(products.selling_price*sales.quantity) ' \
+        'from sales inner join products on sales.product_id=products.product_id;'
     curr.execute(query)
-    sum=curr.fetchall()
+    sum = curr.fetchall()
     return sum
 
-my_sum=sales_sum()
+
+my_sum = sales_sum()
 # print(f'My sum is {my_sum}')
