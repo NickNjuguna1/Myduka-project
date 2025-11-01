@@ -1,12 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for
-from database import fetch_data, insert_products, insert_sales, insert_stock
+from database import fetch_data, insert_products, insert_sales, insert_stock, product_profit
 
 #instance of the Flask class
 app=Flask(__name__)
 
 @app.route('/')
 def home():
-    return  render_template ('index.html')
+    return render_template ('index.html')
 
 # Products route
 @app.route('/products')
@@ -62,6 +62,16 @@ def stock():
     stock=fetch_data('stock')
     return render_template ('stock.html', my_stock=stock)
 
-
+@app.route('/dashboard')
+def dashboard():
+    profit=product_profit()
+    print(profit)
+    # a variable with an empty list to show all products
+    product_names=[]
+    product_profits=[]
+    for i in profit:
+        product_names.append(i[0])
+        product_profits.append(float(i[2]))
+    return render_template ('dashboard.html', product_names=product_names, product_profits=product_profits)
 
 app.run(debug=True)

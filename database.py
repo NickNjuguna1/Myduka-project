@@ -101,9 +101,6 @@ def insert_stock(values):
 #     query=
 
 
-
-
-
 # stock = fetch_data('stock')
 # print('My new stock')
 # print(stock)
