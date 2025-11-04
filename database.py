@@ -133,6 +133,25 @@ def sales_sum():
     sum = curr.fetchall()
     return sum
 
+def products_sales():
+    query = 'select p.name, (selling_price*quantity) as sale from sales as s inner join products as p on s.product_id=p.product_id;'
+    curr.execute(query)
+    sale = curr.fetchall()
+    return sale
+
+def day_sales():
+    query = 'select name, (selling_price*quantity) as sale from sales inner join products on ' \
+    'sales.product_id=products.product_id group by name, sale, now();'
+    curr.execute(query)
+    day_sale = curr.fetchall()
+    return day_sale
+
+def daily_profits():
+    query = 'select name, (selling_price-buying_price) as profit from sales inner join products on ' \
+    'sales.product_id=products.product_id group by name, profit, now();'
+    curr.execute(query)
+    daily_profit = curr.fetchall()
+    return daily_profit
 
 my_sum = sales_sum()
 # print(f'My sum is {my_sum}')
