@@ -83,22 +83,20 @@ def dashboard():
 
     sales_per_day = day_sales()
     print(sales_per_day)
-    product_names=[]
+    dates=[]
     sale_per_day=[]
     for i in sales_per_day:
-        product_names.append(i[0])
+        dates.append(str(i[0]))
         sale_per_day.append(float(i[1]))
 
     profits_per_day = daily_profits()
     print(profits_per_day)
-    product_names=[]
     profit_per_day=[]
     for i in profits_per_day:
-        product_names.append(i[0])
-        profit_per_day.append((i[0]))
+        profit_per_day.append(float(i[1]))
 
     return render_template ('dashboard.html', product_names=product_names, product_profits=product_profits, product_sales=product_sales,
-                            sale_per_day=sale_per_day, profit_per_day=profit_per_day)
+                            sale_per_day=sale_per_day, profit_per_day=profit_per_day, dates=dates)
     
     
 

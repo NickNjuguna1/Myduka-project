@@ -14,34 +14,32 @@
 
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-between">
-        <div class="container-fluid bg-warning">
-            <a class="navbar-brand" href="/">MyDuka</a>
+        <div class="container-fluid fixed-top bg-light">
+            <a class="navbar-brand ms-5 fs-3 fw-bold" href="/">MyDuka</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link" href="/">Home</a>
-                    <a class="nav-link" href="/products" role="button" aria-expanded="false">
+                <div class="navbar-nav me-5 fs-5 ">
+                    <a class="nav-link active me-4" aria-current="page" href="/">Home</a>
+                    <a class="nav-link me-4" href="/products" role="button" aria-expanded="false">
                         Products
                     </a>
-                    <a class="nav-link" href="/sales" role="button" aria-expanded="false">
+                    <a class="nav-link me-4" href="/sales" role="button" aria-expanded="false">
                         Sales
                     </a>
-                    <a class="nav-link" href="/stock" role="button" aria-expanded="false">
+                    <a class="nav-link me-4" href="/stock" role="button" aria-expanded="false">
                         Stock
                     </a>
-                    <a class="nav-link active" aria-current="page" href="/dashboard" role="button"
-                        aria-expanded="false">
+                    <a class="nav-link" href="/dashboard" role="button" aria-expanded="false">
                         Dashboard
                     </a>
                 </div>
             </div>
         </div>
     </nav>
-    <div>
-        <h1 class="container">My Dashboard</h1>
+    <div> <br> <br>
         <div class="d-flex justify-content-between">
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
@@ -155,33 +153,13 @@
         new Chart(document.getElementById("line-chart"), {
             type: 'line',
             data: {
-                labels: [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050],
+                labels: {{product_names | safe}},
                 datasets: [{
-                    data: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
-                    label: "Africa",
+                    data: {{product_profits | safe}},
+                    label: "Profit per Product",
                     borderColor: "#3e95cd",
                     fill: false
-                }, {
-                    data: [282, 350, 411, 502, 635, 809, 947, 1402, 3700, 5267],
-                    label: "Asia",
-                    borderColor: "#8e5ea2",
-                    fill: false
-                }, {
-                    data: [168, 170, 178, 190, 203, 276, 408, 547, 675, 734],
-                    label: "Europe",
-                    borderColor: "#3cba9f",
-                    fill: false
-                }, {
-                    data: [40, 20, 10, 16, 24, 38, 74, 167, 508, 784],
-                    label: "Latin America",
-                    borderColor: "#e8c3b9",
-                    fill: false
-                }, {
-                    data: [6, 3, 2, 2, 7, 26, 82, 172, 312, 433],
-                    label: "North America",
-                    borderColor: "#c45850",
-                    fill: false
-                }
+                }, 
                 ]
             },
             options: {
@@ -216,33 +194,13 @@
         new Chart(document.getElementById("line-chart1"), {
             type: 'line',
             data: {
-                labels: [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050],
+                labels: {{product_names | safe}},
                 datasets: [{
-                    data: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
-                    label: "Africa",
+                    data: {{product_sales | safe}},
+                    label: "Sales per Product",
                     borderColor: "#3e95cd",
                     fill: false
-                }, {
-                    data: [282, 350, 411, 502, 635, 809, 947, 1402, 3700, 5267],
-                    label: "Asia",
-                    borderColor: "#8e5ea2",
-                    fill: false
-                }, {
-                    data: [168, 170, 178, 190, 203, 276, 408, 547, 675, 734],
-                    label: "Europe",
-                    borderColor: "#3cba9f",
-                    fill: false
-                }, {
-                    data: [40, 20, 10, 16, 24, 38, 74, 167, 508, 784],
-                    label: "Latin America",
-                    borderColor: "#e8c3b9",
-                    fill: false
-                }, {
-                    data: [6, 3, 2, 2, 7, 26, 82, 172, 312, 433],
-                    label: "North America",
-                    borderColor: "#c45850",
-                    fill: false
-                }
+                },
                 ]
             },
             options: {
@@ -257,114 +215,74 @@
             type: 'bar',
             data: {
                 labels: {{ product_names | safe}},
-                datasets: [
-                    {
-                        label: "Sales per Day",
-                        backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850","#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#e8c3b9"],
-                        data: {{ sale_per_day | safe}}
+            datasets: [
+            {
+                label: "Sales per Day",
+                backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#e8c3b9"],
+                data: {{ sale_per_day | safe}}
                     }
-                ]
+        ]
             },
             options: {
-                legend: { display: false },
-                title: {
-                    display: true,
-                    text: 'Sales Per Day'
-                }
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'Sales Per Day'
             }
+        }
         });
         // Line chart on Sales per Day
         new Chart(document.getElementById("line-chart2"), {
             type: 'line',
             data: {
-                labels: [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050],
-                datasets: [{
-                    data: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
-                    label: "Africa",
-                    borderColor: "#3e95cd",
-                    fill: false
-                }, {
-                    data: [282, 350, 411, 502, 635, 809, 947, 1402, 3700, 5267],
-                    label: "Asia",
-                    borderColor: "#8e5ea2",
-                    fill: false
-                }, {
-                    data: [168, 170, 178, 190, 203, 276, 408, 547, 675, 734],
-                    label: "Europe",
-                    borderColor: "#3cba9f",
-                    fill: false
-                }, {
-                    data: [40, 20, 10, 16, 24, 38, 74, 167, 508, 784],
-                    label: "Latin America",
-                    borderColor: "#e8c3b9",
-                    fill: false
-                }, {
-                    data: [6, 3, 2, 2, 7, 26, 82, 172, 312, 433],
-                    label: "North America",
-                    borderColor: "#c45850",
-                    fill: false
-                }
-                ]
+                labels: {{ dates | safe}},
+            datasets: [{
+                data: {{ sale_per_day | safe}},
+            label: "Sales",
+            borderColor: "#3e95cd",
+            fill: false
+                },
+        ]
             },
             options: {
-                title: {
-                    display: true,
-                    text: 'Sales per Day'
-                }
+            title: {
+                display: true,
+                text: 'Sales per Day'
             }
+        }
         });
         // Bar chart on Profit per Day
         new Chart(document.getElementById("bar-chart3"), {
             type: 'bar',
             data: {
                 labels: {{ product_names | safe}},
-                datasets: [
-                    {
-                        label: "Profit per Day",
-                        backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850","#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#e8c3b9"],
-                        data: {{ profit_per_day | safe}}
+            datasets: [
+            {
+                label: "Profit per Day",
+                backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#e8c3b9"],
+                data: {{ profit_per_day | safe}}
                     }
-                ]
+        ]
             },
             options: {
-                legend: { display: false },
-                title: {
-                    display: true,
-                    text: 'Profit Per Day'
-                }
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'Profit Per Day'
             }
+        }
         });
         // Line chart on Profit per Day
         new Chart(document.getElementById("line-chart3"), {
             type: 'line',
             data: {
-                labels: [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050],
+                labels: {{ dates | safe }},
                 datasets: [{
-                    data: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
-                    label: "Africa",
+                    data: {{profit_per_day | safe}},
+                    label: "Profit per Day",
                     borderColor: "#3e95cd",
                     fill: false
-                }, {
-                    data: [282, 350, 411, 502, 635, 809, 947, 1402, 3700, 5267],
-                    label: "Asia",
-                    borderColor: "#8e5ea2",
-                    fill: false
-                }, {
-                    data: [168, 170, 178, 190, 203, 276, 408, 547, 675, 734],
-                    label: "Europe",
-                    borderColor: "#3cba9f",
-                    fill: false
-                }, {
-                    data: [40, 20, 10, 16, 24, 38, 74, 167, 508, 784],
-                    label: "Latin America",
-                    borderColor: "#e8c3b9",
-                    fill: false
-                }, {
-                    data: [6, 3, 2, 2, 7, 26, 82, 172, 312, 433],
-                    label: "North America",
-                    borderColor: "#c45850",
-                    fill: false
-                }
+                },
                 ]
             },
             options: {

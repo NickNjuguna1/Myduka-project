@@ -134,24 +134,29 @@ def sales_sum():
     return sum
 
 def products_sales():
-    query = 'select p.name, (selling_price*quantity) as sale from sales as s inner join products as p on s.product_id=p.product_id;'
+    query = 'select p.name, sum(p.selling_price*s.quantity) as total_sales from sales ' \
+    'as s inner join products as p on s.product_id=p.product_id group by p.name, p.product_id;'
     curr.execute(query)
     sale = curr.fetchall()
     return sale
 
+# Sales per Day Function
 def day_sales():
-    query = 'select name, (selling_price*quantity) as sale from sales inner join products on ' \
-    'sales.product_id=products.product_id group by name, sale, now();'
+    query = 'select date(s.created_at), ' \
+    'sum(p.selling_price*s.quantity) as total_sales from sales as s inner join' \
+    ' products as p on s.product_id=p.product_id group by date(s.created_at);'
     curr.execute(query)
     day_sale = curr.fetchall()
-    return day_sale
+    return day_sale 
 
+# profit per Day
 def daily_profits():
-    query = 'select name, (selling_price-buying_price) as profit from sales inner join products on ' \
-    'sales.product_id=products.product_id group by name, profit, now();'
+    query = 'select date(s.created_at), ' \
+    'sum(p.selling_price-p.buying_price) as total_sales from sales as s inner join' \
+    ' products as p on s.product_id=p.product_id group by date(s.created_at);'
     curr.execute(query)
-    daily_profit = curr.fetchall()
-    return daily_profit
+    day_profit = curr.fetchall()
+    return day_profit
 
 my_sum = sales_sum()
 # print(f'My sum is {my_sum}')
