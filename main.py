@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from database import fetch_data, insert_products, insert_sales, insert_stock, product_profit, products_sales, day_sales, daily_profits
+from database import fetch_data, insert_products, insert_sales, insert_stock, product_profit, products_sales, day_sales, daily_profits, insert_users
 
 #instance of the Flask class
 app=Flask(__name__)
@@ -98,6 +98,21 @@ def dashboard():
     return render_template ('dashboard.html', product_names=product_names, product_profits=product_profits, product_sales=product_sales,
                             sale_per_day=sale_per_day, profit_per_day=profit_per_day, dates=dates)
     
-    
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    return render_template ('login.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method=="POST":
+        fname = request.form['fullname']
+        email = request.form['email']
+        password = request.form['password']
+
+        new_user = (fname, email, password)
+        insert_users(new_user)
+        return redirect(url_for('login'))
+        
+    return render_template ('register.html')
 
 app.run(debug=True)

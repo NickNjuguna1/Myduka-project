@@ -158,5 +158,11 @@ def daily_profits():
     day_profit = curr.fetchall()
     return day_profit
 
+def insert_users(user_values):
+    query = "insert into users (full_name, email, password) values(%s,%s,%s);"
+    curr.execute(query,user_values)
+    connect.commit()
+
+    
 my_sum = sales_sum()
 # print(f'My sum is {my_sum}')
