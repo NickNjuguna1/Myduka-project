@@ -166,3 +166,28 @@ def insert_users(user_values):
     
 my_sum = sales_sum()
 # print(f'My sum is {my_sum}')
+
+# Check if user exists
+def check_email(email):
+    query = 'select * from users where email=%s'
+    curr.execute(query,(email,))
+    data = curr.fetchone()
+    return data
+
+# Sales card
+def total_sales():
+    query = 'select sum(selling_price*quantity) from products inner join sales on sales.product_id=products.product_id;'
+    curr.execute(query)
+    data = curr.fetchone()
+    return data[0]
+
+print(total_sales())
+
+# def card_profit():
+#     query = 'select sum(p.selling_price-p.buying_price) as total_sales from sales as s inner join' \
+#     ' products as p on s.product_id=p.product_id;'
+#     curr.execute(query)
+#     day_profits = curr.fetchall()
+#     return day_profits
+
+
