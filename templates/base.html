@@ -16,10 +16,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Document</title>
+    <title>MyDuka</title>
 </head>
 
-<body>
+<body style="background-color: gainsboro;">
     <!-- Template Inheritance - Parent -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-between">
         <div class="container fixed-top bg-light">
@@ -47,16 +47,20 @@
                         style="color: black;">
                         Dashboard
                     </a>
-                    <a class="nav-link me-4 btn btn-lg px-4 py-2 rounded-5"
-                        style="background-color:#007BFF; color: white;" href="/logout" role="button"
-                        aria-expanded="false" style="color: black;">Log out</a>
+                    <a class="nav-link me-4 btn btn-lg px-4 py-2" style="background-color:#007BFF; color: white;"
+                        id="login-btn" href="/login" role="button" aria-expanded="false" style="color: black;">Log
+                        in</a>
                     <a class="nav-link me-4" href="/register" role="button" aria-expanded="false"
                         style="color: black;">Register</a>
+                    <a class="nav-link me-4 btn btn-lg px-4 py-2" style="background-color: crimson; color: white;"
+                        href="/logout" role="button" aria-expanded="false" style="color: black;">Log out</a>
                 </div>
             </div>
         </div>
-    </nav> <br> <br>
+    </nav>
+    
     <div class="container"><!-- Flask with categories - Python inside Jinja -->
+        <br> <br>
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         <ul class=flashes>
@@ -67,7 +71,7 @@
         {% endif %}
         {% endwith %}
     </div>
-    <div class="container">
+    <div class="container-fluid">
         {% block content %} {% endblock %}
     </div>
 
@@ -84,47 +88,14 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
 
+
     <script>{% block script %} {% endblock %}</script>
-<!-- Footer -->
+    <!-- Footer -->
     <footer class="text-center text-lg-start bg-body-tertiary text-muted">
-        <!-- Section: Social media -->
-        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-            <!-- Left -->
-            <div class="me-5 d-none d-lg-block">
-                <span>Get connected with us on social networks:</span>
-            </div>
-            <!-- Left -->
-
-            <!-- Right -->
-            <div>
-                <a href="" class="me-4">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="" class="me-4">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-google"></i>
-                </a>
-                <a href="" class="me-4">
-                    <i class="fab fa-instagram" style="color: #833AB4;;"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-github"></i>
-                </a>
-            </div>
-            <!-- Right -->
-        </section>
-        <!-- Section: Social media -->
-
-        <!-- Section: Links  -->
         <section class="">
             <div class="container-fluid text-center text-md-start mt-5">
                 <!-- Grid row -->
-                <div class="row mt-3" style="background-color:#FADADD;">
+                <div class="row mt-3" style="background-color: gainsboro;">
                     <!-- Grid column -->
                     <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                         <!-- Content -->
@@ -193,14 +164,21 @@
                         <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
                         <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
                     </div>
-                    <div class="text-center p-4">
-                        © 2025 Copyright:
-                        <a class="text-reset fw-bold" href="/"> <span style="color: crimson;">MyDuka</span></a>
+                    <div>
+                        <div class="fs-4 text-center">
+                            <a href="#"><i class="fab fa-facebook-f mx-2"></i></a>
+                            <a href="#"><i class="fab fa-twitter mx-2"></i></a>
+                            <a href="#"><i class="fa-brands fa-instagram mx-2"></i></a>
+                            <a href="#"><i class="fab fa-linkedin mx-2"></i></a>
+                        </div>
+                        <div class="text-center p-4">
+                            © 2025 Copyright:
+                            <a class="text-reset fw-bold" href="/"> <span style="color: crimson;">MyDuka</span></a>
+                        </div>
+                        <!-- Grid column -->
                     </div>
-                    <!-- Grid column -->
+                    <!-- Grid row -->
                 </div>
-                <!-- Grid row -->
-            </div>
         </section>
         <!-- Section: Links  -->
 

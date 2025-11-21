@@ -1,106 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>MyDuka</title>
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-between">
-        <div class="container fixed-top bg-light">
-            <a class="navbar-brand ms-5 fs-3 fw-bold" href="/" style="color: crimson;"><span style="color: black;"><i
-                        class="fa-solid fa-basket-shopping fs-4"></i></span>MyDuka <sup
-                    style="color: black;">Ke</sup></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-                <div class="navbar-nav me-5 fs-5">
-                    <a class="nav-link active me-4" aria-current="page" href="/">Home <sub><i
-                                class="fa-regular fa-house fs-4" style="color: crimson;"></i></sub></a>
-                    <a class="nav-link me-4" href="/products" role="button" aria-expanded="false" style="color: black;">
-                        Products
-                    </a>
-                    <a class="nav-link me-4" href="/sales" role="button" aria-expanded="false" style="color: black;">
-                        Sales
-                    </a>
-                    <a class="nav-link me-4" href="/stock" role="button" aria-expanded="false" style="color: black;">
-                        Stock
-                    </a>
-                    <a class="nav-link me-4" href="/dashboard" role="button" aria-expanded="false"
-                        style="color: black;">
-                        Dashboard
-                    </a>
-                    <a class="nav-link me-4 btn btn-lg px-4 py-2" style="background-color:#007BFF; color: white;"
-                        href="/login" role="button" aria-expanded="false" style="color: black;"><i
-                            class="fa-regular fa-user"></i> Log In</a>
-                    <a class="nav-link me-4" href="/register" role="button" aria-expanded="false"
-                        style="color: black;">Register</a>
+{% extends "base.html" %}
+{% block content %}
+<div id="carouselExampleIndicators" class="carousel container" data-bs-ride="carousel">
+    <div class="carousel-inner image mt-3" data-bs-interval="1000">
+        <div class="carousel-item active">
+            <img src="../static/images/POS1.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block ">
+                <h5 class="fs-2 fw-bolder text-uppercase" style="background-color:crimson; color: rgb(234, 234, 234);">
+                    Experience innovation and
+                    smooth operations with MyDuka POS</h5>
+                <a href="/register"><button type="submit"
+                        class="btn btn-lg btn-primary text-uppercase fs-4 px-4 py-2 mt-5"
+                        style="background-color: #007BFF;">Sign up now
+                    </button></a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="../static/images/POS2.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 class="fs-2 fw-bold text-uppercase" style="background-color: crimson; color:rgb(234, 234, 234) ;">
+                    Experience innovation and
+                    smooth operations with MyDuka POS</h5>
+                <a href="/register"><button type="submit"
+                        class="btn btn-lg btn-primary text-uppercase fs-4 px-4 py-2 mt-5"
+                        style="background-color: #007BFF;">Sign up now
+                    </button></a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="../static/images/POS3.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 class="fs-2 fw-bold text-uppercase" style="background-color: crimson; color: rgb(234, 234, 234);">
+                    Experience innovation and
+                    smooth operations with MyDuka POS</h5>
+                <div class="d-flex justify-content-center">
+                    <a href="/register"><button type="submit"
+                            class="btn btn-lg btn-primary text-uppercase fs-4 px-4 py-2 mt-5"
+                            style="background-color: #007BFF;">Sign up now
+                        </button></a>
                 </div>
             </div>
         </div>
-    </nav>
-
-    <div id="carouselExampleIndicators" class="carousel container" data-bs-ride="carousel">
-        <div class="carousel-inner image" data-bs-interval="1000">
-            <div class="carousel-item active">
-                <img src="../static/images/POS1.jpg" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5 class="fs-2 fw-bold text-uppercase" style="color: rgb(244, 242, 242);">Experience innovation and
-                        smooth operations with <span style="background-color: crimson ;">MyDuka</span> POS</h5>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="../static/images/POS2.jpg" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5 class="fs-2 fw-bold text-uppercase" style="color: rgb(244, 242, 242);">Experience innovation and
-                        smooth operations
-                        with <span style="background-color: crimson ;;">MyDuka</span> POS</h5>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="../static/images/POS3.jpg" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5 class="fs-2 fw-bold text-uppercase" style="color: rgb(244, 242, 242);">Experience innovation and
-                        smooth operations
-                        with <span style="background-color: crimson ;;">MyDuka</span> POS</h5>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
     </div>
-    <br>
-    <div class="d-flex justify-content-center">
-        <a href="/register"><button type="submit" class="btn btn-lg btn-primary text-uppercase fs-4 px-4 py-2"
-                style="background-color: #007BFF;">Sign up now
-            </button></a>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<br>
+
+<br>
+<div style="background-color: #B0C4DE;" class="container-fluid">
+    <div class="fs-3 text-center fw-bold mb-4">
+        Our Features at a Glance!
     </div>
-    <br>
-    <div style="background-color: #B0C4DE;" >
-        <div class="fs-3 text-center fw-bold mb-4">
-            Our Features at a Glance!
-        </div>
-        <div class="d-flex justify-content-center align-items-centre mb-5"
-            style="background-color: #B0C4DE;">
-            <div class="card mx-3" style="width: 18rem ;">
+    <div>
+        <div class="d-flex justify-content-center align-items-centre row" style="background-color: #B0C4DE;">
+            <div class="card col-md-3 col-lg-4 col-xl-3 mx-3 mb-2" style="width: 18rem ;">
                 <img src="../static/images/crm.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title fw-bold">Customer Relationship Management(CRM)</h5>
@@ -108,7 +69,7 @@
                         marketing and loyalty programs.</p>
                 </div>
             </div>
-            <div class="card mx-3" style="width: 18rem;">
+            <div class="card col-md-3 col-lg-4 col-xl-3 mx-3 mb-5" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title fw-bold">Cloud-based Access</h5>
                     <p class="card-text">Allows remote access to sales, inventory, and customer data from anywhere,
@@ -117,7 +78,7 @@
                 </div>
                 <img src="../static/images/cloud.jpg" class="card-img-top" alt="...">
             </div>
-            <div class="card mx-3" style="width: 18rem;">
+            <div class="card col-md-3 col-lg-4 col-xl-3 mx-3 mb-2" style="width: 18rem;">
                 <img src="../static/images/ui.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title fw-bold">User-friendly Interface</h5>
@@ -125,7 +86,7 @@
                         transactions.</p>
                 </div>
             </div>
-            <div class="card mx-3" style="width: 18rem;">
+            <div class="card col-md-3 col-lg-4 col-xl-3 mx-3 mb-5" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title fw-bold">Sales Reporting and Analytics</h5>
                     <p class="card-text">Detailed insights into sales performance, inventory turnover, and customer
@@ -134,39 +95,42 @@
                 <img src="../static/images/Data analytics.jpg" class="card-img-top" alt="...">
             </div>
         </div>
-        <div class="d-flex justify-content-center fs-4 fw-bold mt-5" style="background-color: #B0C4DE;">
+        <div class="d-flex justify-content-center fs-4 fw-bold mt-5 text-center" style="background-color: #B0C4DE;">
             Experience our FREE trial and have more exclusive features designed to elevate your success
         </div>
-        <br>
     </div>
-    <br> <br>
+    <br>
+</div>
+<br> <br>
+<div>
     <div>
-        <div class="container-fluid">
-            <h5 class="fs-2 fw-bold">How to get started with MyDuka POS</h5>
-        </div> <br>
-        <div class="d-flex justify-content-center container">
-            <div class="row col-lg-4">
-                <i class="fa-solid fa-1 fs-4"></i>
-                <p class="fw-bold fs-3">Sign up for FREE</p>
-                <p class="fs-5">Register your account visa free and login</p>
-                <a href="/register"><button class="btn btn-primary text-uppercase fs-4 px-4 py-2"
-                        style="background-color: #007BFF;">Register Now
-                    </button></a>
-            </div>
-            <div class="row col-lg-4">
-                <i class="fa-solid fa-2 fs-4"></i>
-                <p class="fw-bold fs-3">Set up your Products</p>
-                <p class="fs-5">Add your inventory items on Products tab</p>
-            </div>
-            <div class="row col-lg-4">
-                <i class="fa-solid fa-3 fs-4"></i>
-                <p class="fw-bold fs-3">Almost done! Try making a Sale</p>
-                <p class="fs-5">Capture Sales on Sales tab</p>
-            </div>
+        <h5 class="fs-2 fw-bold">How to get started with MyDuka POS</h5>
+    </div> <br>
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <i class="fa-solid fa-1 fs-4"></i>
+            <p class="fw-bold fs-3">Sign up for FREE</p>
+            <p class="fs-5">Register your account visa free and login</p>
+            <a href="/register"><button class="btn btn-primary text-uppercase fs-4 px-4 py-2"
+                    style="background-color: #007BFF;">Register Now
+                </button></a>
+        </div>
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <i class="fa-solid fa-2 fs-4"></i>
+            <p class="fw-bold fs-3">Set up your Products</p>
+            <p class="fs-5">Add your inventory items on Products tab</p>
+        </div>
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <i class="fa-solid fa-3 fs-4"></i>
+            <p class="fw-bold fs-3">Almost done! Try making a Sale</p>
+            <p class="fs-5">Capture Sales on Sales tab</p>
         </div>
     </div>
-    <br> <br>
-    <div class="fs-2 text-center" style="background-color:#E6E6FA; color: black;"> <br>
+</div>
+<br> <br>
+<div class="row">
+    <div class="fs-2 text-center" class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4"
+        style="background-color:#E6E6FA; color: black;"> <br>
         <div>
             Make sales interesting and FUN with MyDuka POS
         </div> <br>
@@ -178,14 +142,12 @@
             Already have an account? <a href="/login">Login</a>
         </div> <br>
     </div>
+</div>
+{% endblock %}
 
-    
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
-        integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
-        crossorigin="anonymous"></script>
-</body>
-
-</html>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+    integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+    crossorigin="anonymous"></script>

@@ -8,26 +8,29 @@ bcrypt = Bcrypt(app)
 
 app.secret_key = '1234569'
 
+
 @app.route('/')
 def home():
     return render_template('index.html')
 
 # Products route
+
+
 @app.route('/products')
 def products():
     if 'email' in session:
         products = fetch_data('products')
     else:
         flash('Log in to access Products', 'error')
-        return redirect (url_for('login'))
-    return render_template('products.html', my_products=products)
+        return redirect(url_for('login'))
+    return render_template('products.html', my_products=products, show_login_button=False)
 
  # Create a function that receives data from UI to the server side
 
 
 @app.route('/add_products', methods=['GET', 'POST'])
 def add_products():
-     # checking method
+    # checking method
     if request.method == 'POST':
         # get form input
         product_name = request.form['name']
@@ -63,7 +66,7 @@ def sales():
     else:
         flash('Log in to access Sales', 'error')
         return redirect(url_for('login'))
-    
+
     return render_template('sales.html', my_sales=sales, products=products)
 
 # Stock route
@@ -86,9 +89,10 @@ def stock():
         stock = fetch_data('stock')
     else:
         flash('Log in to access Stock', 'error')
-        return redirect (url_for('login'))
-    
+        return redirect(url_for('login'))
+
     return render_template('stock.html', my_stock=stock)
+
 
 @app.route('/dashboard')
 def dashboard():
@@ -127,10 +131,11 @@ def dashboard():
         total_sale = total_sales()
     else:
         flash('Log in to access Dashboard', 'error')
-        return redirect (url_for('login'))
+        return redirect(url_for('login'))
 
     return render_template('dashboard.html', product_names=product_names, product_profits=product_profits, product_sales=product_sales,
-                            sale_per_day=sale_per_day, profit_per_day=profit_per_day, dates=dates, total_sale=total_sale)
+                           sale_per_day=sale_per_day, profit_per_day=profit_per_day, dates=dates, total_sale=total_sale)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -143,22 +148,22 @@ def login():
             flash("User doesn't exist. Please register", 'error')
             return redirect(url_for('register'))
         else:
-        # Check if password matches password
+            # Check if password matches password
             if password == check[3]:
                 session['email'] = email
                 flash('Login Successful', 'success')
-                return redirect (url_for('dashboard'))
+                return redirect(url_for('dashboard'))
             else:
-            # check if password matches check password
+                # check if password matches check password
                 # if password == check[3]:
-                if bcrypt.check_password_hash(check[3],password):
+                if bcrypt.check_password_hash(check[3], password):
                     # check_password_hash allows created users with a password to login
                     session['email'] = email
                     flash('Login Successful', 'success')
-                    return redirect (url_for('dashboard'))
+                    return redirect(url_for('dashboard'))
                 else:
                     flash("Wrong password or email", 'error')
-                    return render_template ('login.html')
+                    return render_template('login.html')
 
     return render_template('login.html')
 
@@ -169,7 +174,8 @@ def register():
         fname = request.form['fullname']
         email = request.form['email']
         password = request.form['password']
-        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+        hashed_password = bcrypt.generate_password_hash(
+            password).decode('utf-8')
 # Insert after checking
         new_user = (fname, email, hashed_password)
         check = check_email(email)
@@ -183,12 +189,14 @@ def register():
             flash('User exists. Log in or use a different email', 'error')
         return render_template('register.html')
 
-    return render_template ('register.html')
+    return render_template('register.html')
+
 
 @app.route('/logout')
 def logout():
     session.pop('email')
     flash("You've been logged out", 'error')
     return redirect(url_for('login'))
+
 
 app.run(debug=True)
