@@ -21,3 +21,22 @@
   padding: 10px;
   border-radius: 5px;
 }
+
+.card {
+  transition: 0.3s;
+}
+.card:hover {
+  transform: scale(1.15);
+}
+
+.sign_up{
+  transition: 0.3s;
+}
+
+.sign_up:hover{
+  transform: scale(1.15);
+}
+
+/* html {
+  scroll-behavior: smooth;
+} */

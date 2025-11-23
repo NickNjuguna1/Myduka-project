@@ -16,13 +16,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/add_products" class="form-control" method="POST">
+                <form action="/add_products" class="form-control text-center" method="POST">
                     <label for="name">Product name</label> <br>
-                    <input type="text" id="name" name="name"> <br>
+                    <input type="text" id="name" name="name"> <br> <br>
                     <label for="bp">Buying Price</label> <br>
-                    <input type="number" id="bp" name="buying_price"> <br>
-                    <label for="sp">Selling Price</label> <br>
-                    <input type="number" id="sp" name="selling_price"> <br>
+                    <input type="number" id="bp" name="buying_price"> <br> <br>
+                    <label for="sp">Selling Price</label> <br> 
+                    <input type="number" id="sp" name="selling_price"> <br> <br>
                     <button type="submit" class="btn btn-primary">Add product</button>
                 </form>
             </div>
@@ -56,7 +56,6 @@
                     data-target="#editModal{{ products }}">
                     <i class="fa-solid fa-pencil"></i>
                 </button>
-                
             </td>
         </tr>
         {% endfor %}
