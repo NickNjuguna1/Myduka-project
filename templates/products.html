@@ -21,7 +21,7 @@
                     <input type="text" id="name" name="name"> <br> <br>
                     <label for="bp">Buying Price</label> <br>
                     <input type="number" id="bp" name="buying_price"> <br> <br>
-                    <label for="sp">Selling Price</label> <br> 
+                    <label for="sp">Selling Price</label> <br>
                     <input type="number" id="sp" name="selling_price"> <br> <br>
                     <button type="submit" class="btn btn-primary">Add product</button>
                 </form>
@@ -40,6 +40,7 @@
             <th>buying_price</th>
             <th>selling_price</th>
             <th>Edit</th>
+            <th>Delete</th>
         </tr>
 
     </thead>
@@ -52,10 +53,15 @@
             <td>{{products[2]}}</td>
             <td>{{products[3]}}</td>
             <td>
-                <button type="button" class="btn btn-primary" data-toggle="modal"
-                    data-target="#editModal{{ products }}">
-                    <i class="fa-solid fa-pencil"></i>
-                </button>
+                <a href="{{ url_for('edit_product', product_id=products[0]) }}" class="btn btn-primary btn-sm">
+                    <i class="fa-solid fa-pencil"></i> Edit
+                </a>
+            </td>
+            <td>
+                <form action="{{ url_for('delete_product', product_id=products[0])}}" method="POST" onsubmit="return confirm('Delete this item?')">
+                    <!-- include CSRF token if your framework requires it -->
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
             </td>
         </tr>
         {% endfor %}

@@ -183,6 +183,22 @@ def total_sales():
 
 print(total_sales())
 
+def delete_product(product_id):
+    query = 'delete from products where product_id=%s;'
+    curr.execute(query,(product_id,))
+    connect.commit()
+
+def fetch_product(product_id):
+    query = 'select * from products where product_id=%s;'
+    curr.execute(query,(product_id,))
+    product = curr.fetchone()
+    return product
+
+def update_product(values):
+    query = 'update products set name=%s, buying_price=%s, selling_price=%s where product_id=%s;'
+    curr.execute(query, values)
+    connect.commit()
+
 # def card_profit():
 #     query = 'select sum(p.selling_price-p.buying_price) as total_sales from sales as s inner join' \
 #     ' products as p on s.product_id=p.product_id;'

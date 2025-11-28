@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from database import fetch_data, insert_products, insert_sales, insert_stock, product_profit, products_sales, day_sales, daily_profits, insert_users, check_email, total_sales
+from database import fetch_data, insert_products, insert_sales, insert_stock, product_profit, products_sales, day_sales, daily_profits, insert_users, check_email, total_sales, delete_product as db_delete_product, update_product, fetch_product
 from flask_bcrypt import Bcrypt
 
 # instance of the Flask class
@@ -142,31 +142,33 @@ def login():
     if request.method == "POST":
         email = request.form['email']
         password = request.form['password']
- # Check if user is registered
+        # Check if user is registered
         check = check_email(email)
         if check == None:
             flash("User doesn't exist. Please register", 'error')
             return redirect(url_for('register'))
         else:
-            # Check if password matches password
+            # Try hashed password first
+            try:
+                if bcrypt.check_password_hash(check[3], password):
+                    session['email'] = email
+                    flash('Login Successful', 'success')
+                    return redirect(url_for('dashboard'))
+            except ValueError:
+                # Invalid salt = plain-text password stored
+                pass
+            
+            # Fall back to plain-text check (for old users)
             if password == check[3]:
                 session['email'] = email
                 flash('Login Successful', 'success')
                 return redirect(url_for('dashboard'))
             else:
-                # check if password matches check password
-                # if password == check[3]:
-                if bcrypt.check_password_hash(check[3], password):
-                    # check_password_hash allows created users with a password to login
-                    session['email'] = email
-                    flash('Login Successful', 'success')
-                    return redirect(url_for('dashboard'))
-                else:
-                    flash("Wrong password or email", 'error')
-                    return render_template('login.html')
+                flash("Wrong password or email", 'error')
+                return render_template('login.html')
 
     return render_template('login.html')
-
+# ...existing code...
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -198,5 +200,31 @@ def logout():
     flash("You've been logged out", 'error')
     return redirect(url_for('login'))
 
+@app.route('/delete_product/<int:product_id>', methods=['POST'])
+def delete_product(product_id):
+    if 'email' not in session:
+        flash('Log in to access Products', 'error')
+        return redirect(url_for('login'))
+    db_delete_product(product_id) 
+    flash('Product deleted successfully', 'success')
+    return redirect(url_for('products'))
+
+@app.route('/edit_product/<int:product_id>', methods=['GET', 'POST'])
+def edit_product(product_id):
+    if 'email' not in session:
+        flash('Log in to access Products', 'error')
+        return redirect(url_for('login'))
+    
+    if request.method == 'POST':
+        product_name = request.form['name']
+        buying_price = request.form['buying_price']
+        selling_price = request.form['selling_price']
+        updated_product = (product_name, buying_price, selling_price, product_id)
+        update_product(updated_product)  #imported this function in database.py
+        flash('Product updated successfully', 'success')
+        return redirect(url_for('products'))
+    
+    product = fetch_product(product_id)
+    return render_template('edit_product.html', product=product)
 
 app.run(debug=True)

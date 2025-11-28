@@ -23,7 +23,7 @@
 }
 
 .card {
-  transition: 0.3s;
+  transition: 0.4s;
 }
 .card:hover {
   transform: scale(1.15);
@@ -37,6 +37,6 @@
   transform: scale(1.15);
 }
 
-/* html {
+html {
   scroll-behavior: smooth;
-} */
+}

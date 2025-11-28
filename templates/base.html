@@ -47,13 +47,16 @@
                         style="color: black;">
                         Dashboard
                     </a>
+                    {% if 'email' not in session %}
                     <a class="sign_up nav-link me-4 btn btn-lg px-4 py-2" style="background-color:#007BFF; color: white;"
                         id="login-btn" href="/login" role="button" aria-expanded="false" style="color: black;">Log
                         in</a>
                     <a class="nav-link me-4" href="/register" role="button" aria-expanded="false"
                         style="color: black;">Register</a>
+                    {% else %}
                     <a class="nav-link me-4 btn btn-lg px-4 py-2" style="background-color: crimson; color: white;"
                         href="/logout" role="button" aria-expanded="false" style="color: black;">Log out</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -139,10 +142,10 @@
                             Useful links
                         </h6>
                         <p>
-                            <a href="#!" class="text-reset">Pricing</a>
+                            <a href="#features" class="text-reset">Features</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Settings</a>
+                            <a href="#start" class="text-reset">How to get started</a>
                         </p>
                         <p>
                             <a href="#!" class="text-reset">Orders</a>
@@ -166,10 +169,10 @@
                     </div>
                     <div>
                         <div class="fs-4 text-center">
-                            <a href="#"><i class="fab fa-facebook-f mx-2"></i></a>
-                            <a href="#"><i class="fab fa-twitter mx-2"></i></a>
-                            <a href="#"><i class="fa-brands fa-instagram mx-2"></i></a>
-                            <a href="#"><i class="fab fa-linkedin mx-2"></i></a>
+                            <a href="#"><i class="fab fa-facebook-f mx-2" style="color: #1877F2;"></i></a>
+                            <a href="#"><i class="fab fa-twitter mx-2" style="color: #1DA1F2;"></i></a>
+                            <a href="#"><i class="fa-brands fa-instagram mx-2" style="color: #833AB4;"></i></a>
+                            <a href="#"><i class="fab fa-linkedin mx-2" style="color: #0077B5;"></i></a>
                         </div>
                         <div class="text-center p-4">
                             © 2025 Copyright:
