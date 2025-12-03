@@ -2,8 +2,8 @@
 {% block content %}
 <br> <br>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Add Products
+<button type="button" class="ms-5 btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    <i class="fa-solid fa-plus"></i> New Product
 </button>
 
 <!-- Modal -->
@@ -32,7 +32,8 @@
         </div>
     </div>
 </div> <br> <br>
-<table class="display text-bg-primary container" id="myTable">
+<table class="row">
+<table class="display text-center container text-bg-primary col-md-3 col-lg-4 col-xl-4" id="myTable">
     <thead>
         <tr>
             <th>product_id</th>
@@ -54,18 +55,20 @@
             <td>{{products[3]}}</td>
             <td>
                 <a href="{{ url_for('edit_product', product_id=products[0]) }}" class="btn btn-primary btn-sm">
-                    <i class="fa-solid fa-pencil"></i> Edit
+                    <i class="fa-regular fa-pen-to-square fs-5"></i> 
                 </a>
             </td>
             <td>
                 <form action="{{ url_for('delete_product', product_id=products[0])}}" method="POST" onsubmit="return confirm('Delete this item?')">
                     <!-- include CSRF token if your framework requires it -->
-                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    <button type="submit" class="btn btn-danger btn-sm fs-5"><i class="fa-solid fa-delete-left"></i></button> 
+                    
                 </form>
             </td>
         </tr>
         {% endfor %}
     </tbody>
+</table>
 </table>
 <!-- end block before Javascript -->
 {% endblock %}

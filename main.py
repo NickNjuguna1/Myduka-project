@@ -152,6 +152,7 @@ def login():
             try:
                 if bcrypt.check_password_hash(check[3], password):
                     session['email'] = email
+                    session ['fullname'] = check[1] # Storing full name in session
                     flash('Login Successful', 'success')
                     return redirect(url_for('dashboard'))
             except ValueError:
@@ -161,6 +162,7 @@ def login():
             # Fall back to plain-text check (for old users)
             if password == check[3]:
                 session['email'] = email
+                session ['fullname'] = check[1] # Storing full name in session
                 flash('Login Successful', 'success')
                 return redirect(url_for('dashboard'))
             else:
@@ -168,7 +170,6 @@ def login():
                 return render_template('login.html')
 
     return render_template('login.html')
-# ...existing code...
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():

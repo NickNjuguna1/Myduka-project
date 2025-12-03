@@ -1,15 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
-<!-- Modal -->
-<div class="text-center d-flex justify-content-center px-5 row">
+ <br> <br>
+<div class="text-center container w-50 px-5">
     <form action="/register" class="form-control col-md-3 col-lg-4 col-xl-3" method="POST" style="background-color:;">
+        <div class="fs-4">Please enter your details to create an account</div> <br>
         <label for="fullname">Full name</label> <br> 
         <input type="text" id="fullname" name="fullname" placeholder="Enter your name"> <br> <br>
         <label for="email">Email</label> <br>
         <input type="email" id="email" name="email" placeholder="myduka@gmail.com"> <br> <br>
         <label for="">Password</label> <br>
         <input type="password" id="password" name="password" placeholder="Enter password"> <br> <br> <br>
-        <button type="submit" class="btn btn-primary">Click to Register</button> <br> <br>
+        <button type="submit" class="btn btn-primary sign_up">Click to Register</button> <br> <br>
     </form>
 </div> 
 {% endblock %}

@@ -40,3 +40,50 @@
 html {
   scroll-behavior: smooth;
 }
+.navbar-brand:hover {
+  transform: scale(1.08);
+
+}
+.navbar-brand {
+  transition: transform 0.15s ease;
+}
+
+/* Hovers seperated for a smooth transition effect */
+.nav-link:hover {
+  transform: scale(1.08);
+}
+.nav-link {
+  transition: transform 0.15s ease;
+}
+.carousel-caption {
+  bottom: 5%;
+}
+
+.steps:hover {
+  transform: scale(1.05);
+}
+.steps {
+  transition: transform 0.3s;
+}
+
+/* Show Features Button on Footer Clearly */
+#features {
+  scroll-margin-top: 130px;
+}
+#start {
+  scroll-margin-top: 250px;
+}
+
+brand_footer{
+  transition: transform 0.3s;
+}
+brand_footer:hover{
+  transform: scale(1.05);
+}
+
+/* .card-img-top {
+  width: 100%;
+  height: 150px;         
+  object-fit: cover;
+  display: block;
+} */

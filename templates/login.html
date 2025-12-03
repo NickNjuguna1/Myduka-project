@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-
+<br> <br> 
 <div class="container text-center w-50 px-5">
     <form action="/login" class="form-control" method="POST">
+        <div class="fs-4">Welcome Back. Please Login.</div>
         <div> <br>
             <label for="email">Email</label> <br>
-            <input type="text" id="email" name="email"> <br> <br>
+            <input type="text" id="email" name="email" placeholder="Enter existing email"> <br> <br>
             <label for="">Password</label> <br>
-            <input type="password" id="password" name="password"> <br> <br>
+            <input type="password" id="password" name="password" placeholder="Enter existing password"> <br> <br>
             <button type="submit" class="btn btn-primary px-4 py-2">Login</button> <br> <br>
         </div>
     </form> <br> <br> <br>
