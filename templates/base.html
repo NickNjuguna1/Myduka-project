@@ -56,19 +56,19 @@
                         style="color: black;">Register</a>
                     {% else %}
                     <!-- Show account dropdown if logged in -->
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropend">
                         <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-user-circle"></i> {{ session.get('fullname', session.get('email')) }}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="accountDropdown">
-                            <li><a class="dropdown-item d-flex justify-content-center fs-5 rounded-5 px-5"
-                                    href="/logout" style="background-color: crimson; color: whitesmoke;">Logout</a></li> <br>
-                            <li><a class="dropdown-item d-flex justify-content-center fs-5 rounded-5" href=""
-                                    style="background-color: crimson; background-color:#007BFF; color: whitesmoke;">Reset Account</a></li>
+                            <li><a class="dropdown-item fs-5 text-center mb-1" href="/logout"
+                                    style="background-color: crimson; color: whitesmoke;">Logout</a></li>
+                            <li><a class="dropdown-item fs-5 text-center" href=""
+                                    style="background-color: crimson; background-color:#ff9d00; color: whitesmoke;">Reset
+                                    Account</a></li>
                         </ul>
                     </li>
-
                     {% endif %}
                 </div>
             </div>
@@ -81,7 +81,11 @@
         {% if messages %}
         <ul class=flashes>
             {% for category, message in messages %}
-            <li class="{{ category }} list-unstyled container text-center">{{ message }}</li>
+            {% set bs_class = 'danger' if category == 'error' else category %}
+            <div class="alert alert-{{ bs_class }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
             {% endfor %}
         </ul>
         {% endif %}
@@ -157,13 +161,13 @@
                             <a href="/#features" class="text-reset">Features</a>
                         </p>
                         <p>
-                            <a href="/#start" class="text-reset">Get started Today!</a>
+                            <a href="/#start" class="text-reset">Activate</a>
                         </p>
                         <p>
-                            <a href="/register" class="text-reset">Register Now!</a>
+                            <a href="/register" class="text-reset">Jump in</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Help</a>
+                            <a href="/#pricing" class="text-reset">Pricing</a>
                         </p>
                     </div>
                     <!-- Grid column -->
