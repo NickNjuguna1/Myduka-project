@@ -1,35 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
-<div> 
+<div>
     <div class="d-flex justify-content-center row">
         <div class="card mx-3 col-md-3 col-lg-4 col-xl-3" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Profit</h5>
-                <h6 class="card-subtitle mb-2 text-muted">My Profit</h6>
+            <div class="card-body text-center">
+                <h6 class="card-subtitle mt-5 fs-4 text-muted">My Profit</h6>
+                <p class="card_text fs-3" style="color: crimson;">Ksh {{total_profit}}</p>
             </div>
         </div>
         <div class="card mx-3 col-md-3 col-lg-4 col-xl-3" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Sales</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Total Sales</h6>
-                <p class="card-text"> {{total_sale}}</p>
+            <div class="card-body text-center">
+                <h6 class="card-subtitle mt-5 fs-4 text-muted">Total Sales</h6>
+                <p class="card-text fs-3" style="color: crimson;">Ksh {{total_sale}}</p>
             </div>
         </div>
         <div class="card mx-3 col-md-3 col-lg-4 col-xl-3" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Stock</h5>
-                <h6 class="card-subtitle mb-2 text-muted">My Stock</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
+            <div class="card-body text-center">
+                <h6 class="card-subtitle mt-5 fs-4 text-muted">
+                    Stock</h6>
+                <p class="card-text fs-3" style="color: crimson;"> {{total_stock}} Stocked</p>
             </div>
         </div>
         <div class="card mx-3 col-md-3 col-lg-4 col-xl-3" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                    the
-                    card's content.</p>
+            <div class="card-body text-center">
+                <h6 class="card-subtitle mt-4 fs-4 text-muted">Highest Product Profit</h6>
+                <p class="card-text fs-3" style="color: crimson;"> {{ highest_profit_products }}</p>
             </div>
         </div>
     </div>
@@ -69,169 +64,174 @@
 
 <!-- All JS in block script -->
 {% block script %}
-    // Bar chart on Profit per Product
-    new Chart(document.getElementById("bar-chart"), {
-        type: 'bar',
-        data: {
-            labels: {{ product_names | safe}},
-        datasets: [
-        {
-            label: "Product Name",
-            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
-            data: {{ product_profits | safe}}
-                        }
-    ]
-                },
-        options: {
-        legend: { display: false },
-        title: {
-            display: true,
-            text: 'Profit per Product'
-        }
-    }
-            });
+// Bar chart on Profit per Product
+new Chart(document.getElementById("bar-chart"), {
+type: 'bar',
+data: {
+labels: {{ product_names | safe}},
+datasets: [
+{
+label: "Product Name",
+backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9",
+"#c45850"],
+data: {{ product_profits | safe}}
+}
+]
+},
+options: {
+legend: { display: false },
+title: {
+display: true,
+text: 'Profit per Product'
+}
+}
+});
 
-    // Line Chart on Profit per Product
-    new Chart(document.getElementById("line-chart"), {
-        type: 'line',
-        data: {
-            labels: {{ product_names | safe}},
-        datasets: [{
-            data: {{ product_profits | safe}},
-        label: "Profit per Product",
-        borderColor: "#3e95cd",
-        fill: false
-                },
-    ]
-            },
-        options: {
-        title: {
-            display: true,
-            text: 'Profit per Product'
-        }
-    }
-        });
-    // Bar chart on Sales per Product
-    new Chart(document.getElementById("bar-chart1"), {
-        type: 'bar',
-        data: {
-            labels: {{ product_names | safe}},
-        datasets: [
-        {
-            label: "Sales",
-            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#e8c3b9"],
-            data: {{ product_sales | safe}}
-            }
-    ]
-            },
-        options: {
-        legend: { display: false },
-        title: {
-            display: true,
-            text: 'Sales per Product'
-        }
-    }
-        });
-    // Line chart on Sales per Product
-    new Chart(document.getElementById("line-chart1"), {
-        type: 'line',
-        data: {
-            labels: {{ product_names | safe}},
-        datasets: [{
-            data: {{ product_sales | safe}},
-        label: "Sales per Product",
-        borderColor: "#3e95cd",
-        fill: false
-                },
-    ]
-            },
-        options: {
-        title: {
-            display: true,
-            text: 'Sales per Product'
-        }
-    }
-        });
-    // Bar chart on Sales per Day
-    new Chart(document.getElementById("bar-chart2"), {
-        type: 'bar',
-        data: {
-            labels: {{ product_names | safe}},
-        datasets: [
-        {
-            label: "Sales per Day",
-            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#e8c3b9"],
-            data: {{ sale_per_day | safe}}
-                    }
-    ]
-            },
-        options: {
-        legend: { display: false },
-        title: {
-            display: true,
-            text: 'Sales Per Day'
-        }
-    }
-        });
-    // Line chart on Sales per Day
-    new Chart(document.getElementById("line-chart2"), {
-        type: 'line',
-        data: {
-            labels: {{ dates | safe}},
-        datasets: [{
-            data: {{ sale_per_day | safe}},
-        label: "Sales",
-        borderColor: "#3e95cd",
-        fill: false
-                },
-    ]
-            },
-        options: {
-        title: {
-            display: true,
-            text: 'Sales per Day'
-        }
-    }
-        });
-    // Bar chart on Profit per Day
-    new Chart(document.getElementById("bar-chart3"), {
-        type: 'bar',
-        data: {
-            labels: {{ product_names | safe}},
-        datasets: [
-        {
-            label: "Profit per Day",
-            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#e8c3b9"],
-            data: {{ profit_per_day | safe}}
-                    }
-    ]
-            },
-        options: {
-        legend: { display: false },
-        title: {
-            display: true,
-            text: 'Profit Per Day'
-        }
-    }
-        });
-    // Line chart on Profit per Day
-    new Chart(document.getElementById("line-chart3"), {
-        type: 'line',
-        data: {
-            labels: {{ dates | safe }},
-        datasets: [{
-            data: {{ profit_per_day | safe}},
-        label: "Profit per Day",
-        borderColor: "#3e95cd",
-        fill: false
-                },
-    ]
-            },
-        options: {
-        title: {
-            display: true,
-            text: 'Profit per Day'
-        }
-    }
-        });
+
+// Line Chart on Profit per Product
+new Chart(document.getElementById("line-chart"), {
+type: 'line',
+data: {
+labels: {{ product_names | safe}},
+datasets: [{
+data: {{ product_profits | safe}},
+label: "Profit per Product",
+borderColor: "#3e95cd",
+fill: false
+},
+]
+},
+options: {
+title: {
+display: true,
+text: 'Profit per Product'
+}
+}
+});
+// Bar chart on Sales per Product
+new Chart(document.getElementById("bar-chart1"), {
+type: 'bar',
+data: {
+labels: {{ product_names | safe}},
+datasets: [
+{
+label: "Sales",
+backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9",
+"#c45850", "#e8c3b9"],
+data: {{ product_sales | safe}}
+}
+]
+},
+options: {
+legend: { display: false },
+title: {
+display: true,
+text: 'Sales per Product'
+}
+}
+});
+// Line chart on Sales per Product
+new Chart(document.getElementById("line-chart1"), {
+type: 'line',
+data: {
+labels: {{ product_names | safe}},
+datasets: [{
+data: {{ product_sales | safe}},
+label: "Sales per Product",
+borderColor: "#3e95cd",
+fill: false
+},
+]
+},
+options: {
+title: {
+display: true,
+text: 'Sales per Product'
+}
+}
+});
+// Bar chart on Sales per Day
+new Chart(document.getElementById("bar-chart2"), {
+type: 'bar',
+data: {
+labels: {{ product_names | safe}},
+datasets: [
+{
+label: "Sales per Day",
+backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9",
+"#c45850", "#e8c3b9"],
+data: {{ sale_per_day | safe}}
+}
+]
+},
+options: {
+legend: { display: false },
+title: {
+display: true,
+text: 'Sales Per Day'
+}
+}
+});
+// Line chart on Sales per Day
+new Chart(document.getElementById("line-chart2"), {
+type: 'line',
+data: {
+labels: {{ dates | safe}},
+datasets: [{
+data: {{ sale_per_day | safe}},
+label: "Sales",
+borderColor: "#3e95cd",
+fill: false
+},
+]
+},
+options: {
+title: {
+display: true,
+text: 'Sales per Day'
+}
+}
+});
+// Bar chart on Profit per Day
+new Chart(document.getElementById("bar-chart3"), {
+type: 'bar',
+data: {
+labels: {{ product_names | safe}},
+datasets: [
+{
+label: "Profit per Day",
+backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9",
+"#c45850", "#e8c3b9"],
+data: {{ profit_per_day | safe}}
+}
+]
+},
+options: {
+legend: { display: false },
+title: {
+display: true,
+text: 'Profit Per Day'
+}
+}
+});
+// Line chart on Profit per Day
+new Chart(document.getElementById("line-chart3"), {
+type: 'line',
+data: {
+labels: {{ dates | safe }},
+datasets: [{
+data: {{ profit_per_day | safe}},
+label: "Profit per Day",
+borderColor: "#3e95cd",
+fill: false
+},
+]
+},
+options: {
+title: {
+display: true,
+text: 'Profit per Day'
+}
+}
+});
 {% endblock %}

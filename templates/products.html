@@ -5,71 +5,67 @@
 <button type="button" class="ms-5 btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
     <i class="fa-solid fa-plus"></i> New Product
 </button>
-
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Products</h1>
+            <div class="modal-header" style="background-color: grey; color: whitesmoke;">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add a new product</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/add_products" class="form-control text-center" method="POST">
-                    <label for="name">Product name</label> <br>
-                    <input type="text" id="name" name="name"> <br> <br>
-                    <label for="bp">Buying Price</label> <br>
-                    <input type="number" id="bp" name="buying_price"> <br> <br>
-                    <label for="sp">Selling Price</label> <br>
-                    <input type="number" id="sp" name="selling_price"> <br> <br>
-                    <button type="submit" class="btn btn-primary">Add product</button>
+                <form action="/add_products" class="text-center" method="POST">
+                    <input type="text" id="name" name="name" class="form-control w-50 mx-auto" placeholder="Enter new product name"> <br> 
+                    <input type="number" id="bp" name="buying_price" class="form-control w-50 mx-auto" placeholder="Enter/Select buying price"> <br> 
+                    <input type="number" id="sp" name="selling_price" class="form-control w-50 mx-auto" placeholder="Enter/Select selling price"> <br>
+                    <button type="submit" class="btn btn-primary">Proceed</button>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <div class="modal-footer" style="background-color: grey; color: whitesmoke;">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-</div> <br> <br>
-<table class="row">
-<table class="display text-center container text-bg-primary col-md-3 col-lg-4 col-xl-4" id="myTable">
-    <thead>
-        <tr>
-            <th>product_id</th>
-            <th>name</th>
-            <th>buying_price</th>
-            <th>selling_price</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
+</div> <br>
+<div>
+    <table class="display text-center" id="myTable">
+        <thead>
+            <tr>
+                <th>Product id</th>
+                <th>Name</th>
+                <th>Buying price</th>
+                <th>Selling price</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for products in my_products %}
+            <tr>
+                <td>{{products[0]}}</td>
+                <td>{{products[1]}}</td>
+                <td>{{products[2]}}</td>
+                <td>{{products[3]}}</td>
+                <td>
+                    <a href="{{ url_for('edit_product', product_id=products[0]) }}" class="btn btn-primary btn-sm">
+                        <i class="fa-regular fa-pen-to-square fs-5"></i>
+                    </a>
+                </td>
+                <td>
+                    <form action="{{ url_for('delete_product', product_id=products[0])}}" method="POST"
+                        onsubmit="return confirm('Delete this item?')">
+                        <!-- include CSRF token if your framework requires it -->
+                        <button type="submit" class="btn btn-danger btn-sm fs-5"><i
+                                class="fa-solid fa-delete-left"></i></button>
 
-    </thead>
-
-    <tbody>
-        {% for products in my_products %}
-        <tr>
-            <td>{{products[0]}}</td>
-            <td>{{products[1]}}</td>
-            <td>{{products[2]}}</td>
-            <td>{{products[3]}}</td>
-            <td>
-                <a href="{{ url_for('edit_product', product_id=products[0]) }}" class="btn btn-primary btn-sm">
-                    <i class="fa-regular fa-pen-to-square fs-5"></i> 
-                </a>
-            </td>
-            <td>
-                <form action="{{ url_for('delete_product', product_id=products[0])}}" method="POST" onsubmit="return confirm('Delete this item?')">
-                    <!-- include CSRF token if your framework requires it -->
-                    <button type="submit" class="btn btn-danger btn-sm fs-5"><i class="fa-solid fa-delete-left"></i></button> 
-                    
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-</table>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 <!-- end block before Javascript -->
 {% endblock %}
 

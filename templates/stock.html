@@ -2,63 +2,69 @@
 {% block content %}
 <br> <br>
 <!-- Button trigger modal -->
-    <button type="button" class="ms-5 btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        <i class="fa-solid fa-plus"></i> New Stock
-    </button>
-    <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Stock</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="/add_stock" class="form-control" method="POST">
-                        <label for="prod_id">Product Id</label> <br>
-                        <input type="number" id="prod_id" name="product_id"> <br>
-                        <label for="stockq">Stock Quantity</label> <br>
-                        <input type="number" id="stockq" name="stock_quantity"> <br>
-                        <button type="submit" class="btn btn-primary">Add stock</button>
-                    </form>
-                </div>
+<button type="button" class="ms-5 btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    <i class="fa-solid fa-plus"></i> New Stock
+</button>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: grey;">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel" style="color: whitesmoke;">Add new stock</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/add_stock" class="text-center" method="POST">
+                    <input type="number" id="prod_id" name="product_id" class="form-control mx-auto w-50"
+                        placeholder="Enter/Select product_id"> <br>
+                    <input type="number" id="stockq" name="stock_quantity" placeholder="Enter/Select new stock" class="form-control w-50 mx-auto"> <br>
+                    <button type="submit" class="btn btn-primary">Proceed</button>
+                </form>
+            </div>
+            <div class="modal-footer" style="background-color: grey; color: whitesmoke;">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-    <table class="display container text-bg-primary" id="myTable">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>product_id</th>
-                <th>stock_quantity</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for stock in my_stock %}
-            <tr>
-                <td>{{stock[0]}}</td>
-                <td>{{stock[1]}}</td>
-                <td>{{stock[2]}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    </table>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
-        integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
-        crossorigin="anonymous"></script>
-{% endblock %}   
+</div>
+<div class="row">
+    <div class="col-md-2 col-lg-3 col-xl-12 mx-auto">
+        <table class="display" id="myTable">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Product id</th>
+                    <th>Stock quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stock in my_stock %}
+                <tr>
+                    <td>{{stock[0]}}</td>
+                    <td>{{stock[1]}}</td>
+                    <td>{{stock[2]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
-{% block script %} 
-        let table = new DataTable('#myTable');
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+    integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+    crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block script %}
+let table = new DataTable('#myTable');
 {% endblock %}
 
 </html>

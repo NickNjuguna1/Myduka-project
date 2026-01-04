@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from database import fetch_data, insert_products, insert_sales, insert_stock, product_profit, products_sales, day_sales, daily_profits, insert_users, check_email, total_sales, delete_product as db_delete_product, update_product, fetch_product
+from database import fetch_data, insert_products, insert_sales, insert_stock, product_profit, products_sales, day_sales, daily_profits, insert_users, check_email, total_sales, delete_product as db_delete_product, update_product, fetch_product, get_remaining_stock, total_profits, total_stocks, highest_profit_product
 from flask_bcrypt import Bcrypt
 
 # instance of the Flask class
@@ -49,10 +49,24 @@ def add_products():
 @app.route('/add_sales', methods=['GET', 'POST'])
 def add_sales():
     if request.method == 'POST':
-        product_sale = request.form['product_id']
-        quantity = request.form['quantity']
-        new_sales = (product_sale, quantity)
-        insert_sales(new_sales)
+        # validate inputs
+        try:
+            product_id = int(request.form.get('product_id'))
+            quantity = int(request.form.get('quantity'))
+        except (TypeError, ValueError):
+            flash('Invalid product or quantity', 'error')
+            return redirect(url_for('sales'))
+
+        if quantity <= 0:
+            flash('Quantity must be at least 1', 'error')
+            return redirect(url_for('sales'))
+
+        remaining = get_remaining_stock(product_id)
+        if quantity > remaining:
+            flash(f'Not enough stock (only {remaining} remaining)', 'error')
+            return redirect(url_for('sales'))
+
+        insert_sales((product_id, quantity))
         flash('New Sale Added', 'success')
     return redirect(url_for('sales'))
 
@@ -61,18 +75,20 @@ def add_sales():
 def sales():
     if 'email' in session:
         sales = fetch_data('sales')
-        # fetch products to display on Select
-        products = fetch_data('products')
+        # fetch products and attach remaining stock
+        products_raw = fetch_data('products')
+        products = []
+        # for i is the same to for p in products_raw:
+        for p in products_raw:
+            remaining = get_remaining_stock(p[0])
+            products.append((p[0], p[1], remaining))
     else:
         flash('Log in to access Sales', 'error')
         return redirect(url_for('login'))
-
     return render_template('sales.html', my_sales=sales, products=products)
 
 # Stock route
-
-
-@app.route('/add_stock', methods=['GET', 'POST'])
+@app.route('/add_stock', methods=['POST'])
 def add_stock():
     if request.method == 'POST':
         product_stock = request.form['product_id']
@@ -82,13 +98,12 @@ def add_stock():
         flash('New Stock Added', 'success')
     return redirect(url_for('stock'))
 
-
 @app.route('/stock')
 def stock():
     if 'email' in session:
         stock = fetch_data('stock')
     else:
-        flash('Log in to access Stock', 'error')
+        flash('Log in to view Stock', 'error')
         return redirect(url_for('login'))
 
     return render_template('stock.html', my_stock=stock)
@@ -129,12 +144,15 @@ def dashboard():
             profit_per_day.append(float(i[1]))
 
         total_sale = total_sales()
+        total_profit = total_profits()
+        total_stock = total_stocks()
+        highest_profit_products = highest_profit_product()
     else:
         flash('Log in to access Dashboard', 'error')
         return redirect(url_for('login'))
 
     return render_template('dashboard.html', product_names=product_names, product_profits=product_profits, product_sales=product_sales,
-                           sale_per_day=sale_per_day, profit_per_day=profit_per_day, dates=dates, total_sale=total_sale)
+                           sale_per_day=sale_per_day, profit_per_day=profit_per_day, dates=dates, total_sale=total_sale, total_profit=total_profit, total_stock=total_stock, highest_profit_products=highest_profit_products)
 
 
 @app.route('/login', methods=['GET', 'POST'])

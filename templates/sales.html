@@ -1,73 +1,98 @@
 {% extends "base.html" %}
 {% block content %}
 <br> <br>
-    <!-- Button trigger modal -->
-    <button type="button" class="ms-5 btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        <i class="fa-solid fa-plus"></i> New Sale
-    </button>
-    <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Sales</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="/add_sales" class="form-control" method="POST">
-                        <label for="product_id">Products</label> <br>
-                        <select name="product_id" id="product_id">
-                            {% for product in products %}
-                            <option value="{{product[0]}}">{{product[1]}}</option>
-                            {% endfor %}
-                        </select> <br>
-                        <label for="q">Quantity</label> <br>
-                        <input type="number" id="q" name="quantity"> <br><br>
-                        <button type="submit" class="btn btn-primary">Add sales</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
+<!-- Button trigger modal -->
+<button type="button" class="ms-5 btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    <i class="fa-solid fa-plus"></i> New Sale
+</button>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: grey; color: whitesmoke;">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add a new sale</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/add_sales" class="text-center" method="POST">
+                    <select name="product_id" id="product_id" class="form-select w-50 mx-auto" required>
+                        {% for product in products %}
+                        <option value="{{product[0]}}" data-remaining="{{product[2]}}">{{product[1]}} ({{product[2]}} left)</option>
+                        {% endfor %}
+                    </select> <br>
+                    <input type="number" id="q" name="quantity" class="form-control w-50 mx-auto" placeholder="Enter/Select quantity" min="1" required> <br>
+                    <div class="text-center"><small id="remainingInfo">Remaining stock: --</small></div><br>
+                    <button type="submit" class="btn btn-primary">Proceed</button>
+                </form>
+            </div>
+            <div class="modal-footer" style="background-color: grey; color: whitesmoke;">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-    
-    <table class="display container text-bg-primary" id="myTable">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>product_id</th>
-                <th>quantity</th>
-                <th>created_at</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for sales in my_sales %}
-            <tr>
-                <td>{{sales[0]}}</td>
-                <td>{{sales[1]}}</td>
-                <td>{{sales[2]}}</td>
-                <td>{{sales[3]}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    </table>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
-        integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
-        crossorigin="anonymous"></script>
+</div>
+
+<table class="display" id="myTable">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Product id</th>
+            <th>Quantity</th>
+            <th>Created at</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for sales in my_sales %}
+        <tr>
+            <td>{{sales[0]}}</td>
+            <td>{{sales[1]}}</td>
+            <td>{{sales[2]}}</td>
+            <td>{{sales[3]}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</table>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+    integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+    crossorigin="anonymous"></script>
 {% endblock %}
 {% block script %}
-        let table = new DataTable('#myTable');
+let table = new DataTable('#myTable');
+
+document.addEventListener('DOMContentLoaded', () => {
+    const select = document.getElementById('product_id');
+    const qty = document.getElementById('q');
+    const remainingInfo = document.getElementById('remainingInfo');
+
+    function updateRemaining(){
+        if (!select) return;
+        const opt = select.options[select.selectedIndex];
+        const remaining = parseInt(opt.dataset.remaining || '0', 10);
+        remainingInfo.textContent = `Remaining stock: ${remaining}`;
+        qty.max = remaining;
+        // adjust value if it exceeds remaining
+        if (qty.value) {
+            const val = Number(qty.value);
+            if (val > remaining) qty.value = remaining > 0 ? remaining : '';
+        }
+        // disable submit if out of stock
+        const submit = document.querySelector('form button[type="submit"]');
+        if (submit) submit.disabled = remaining <= 0;
+    }
+
+    // initialize and attach listener
+    updateRemaining();
+    if (select) select.addEventListener('change', updateRemaining);
+});
 {% endblock %}
 </body>
 

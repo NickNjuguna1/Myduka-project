@@ -1,17 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
-<br> <br> 
-<div class="container text-center w-50 px-5">
-    <form action="/login" class="form-control" method="POST">
-        <div class="fs-4">Welcome Back. Please Login.</div>
-        <div> <br>
-            <label for="email">Email</label> <br>
-            <input type="text" id="email" name="email" placeholder="Enter existing email"> <br> <br>
-            <label for="">Password</label> <br>
-            <input type="password" id="password" name="password" placeholder="Enter existing password"> <br> <br>
-            <button type="submit" class="btn btn-primary px-4 py-2">Login</button> <br> <br>
+<br>
+<div class="auth w-50">
+    <div class="left">
+        <div style="color: whitesmoke;" class="text-center mt-5">
+            <h2> Hello! Welcome </h2>
+            <p> Don't have an account? </p>
+            <a href="/register"><button type="submit" class="btn btn-primary sign_up fs-5">Register > </button></a>
         </div>
-    </form> <br> <br> <br>
+    </div>
+    <div class="right form-control col-md-3 col-lg-4 col-xl-3">
+        <div>
+            <form action="/login" method="POST"> <br>
+                <input type="text" id="email" name="email" placeholder="Enter existing email" class="form-control"><i
+                    class="fa-regular fa-user"></i><br>
+                <input type="password" id="password" name="password" class="form-control"
+                    placeholder="Enter existing password"><i class="fa-solid fa-lock"></i><br>
+                <button type="submit" class="btn btn-outline-primary px-4 py-2 container">Login</button>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}
 

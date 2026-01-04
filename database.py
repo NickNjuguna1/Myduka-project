@@ -98,7 +98,7 @@ def insert_sales(values):
 
 
 def insert_stock(values):
-    query = "insert into stock(id, product_id, stock_quantity) values (%s, %s, %s);"
+    query = "insert into stock(product_id, stock_quantity) values (%s, %s);"
     curr.execute(query, values)
     connect.commit()
 
@@ -174,7 +174,7 @@ def check_email(email):
     data = curr.fetchone()
     return data
 
-# Sales card
+# Sales card on Dashboard
 def total_sales():
     query = 'select sum(selling_price*quantity) from products inner join sales on sales.product_id=products.product_id;'
     curr.execute(query)
@@ -182,6 +182,28 @@ def total_sales():
     return data[0]
 
 print(total_sales())
+
+# Profit card on Dashboard
+def total_profits():
+    query = 'select sum((selling_price-buying_price)*quantity) from products inner join sales on sales.product_id=products.product_id;'
+    curr.execute(query)
+    data = curr.fetchone()
+    return data[0]
+
+#Stock card on Dashboard
+def total_stocks():
+    query = 'select sum(stock_quantity) from stock;'
+    curr.execute(query)
+    data = curr.fetchone()
+    return data[0]
+
+# Product with the most profit card on dashboard
+def highest_profit_product():
+    query = 'select p.name, p.product_id, sum((selling_price-buying_price)*s.quantity) ' \
+    'as profit from sales s inner join products p on s.product_id = p.product_id group by p.name, p.product_id order by profit desc limit 1;'
+    curr.execute(query)
+    data = curr.fetchone()   
+    return data[0]
 
 def delete_product(product_id):
     query = 'delete from products where product_id=%s;'
@@ -198,6 +220,17 @@ def update_product(values):
     query = 'update products set name=%s, buying_price=%s, selling_price=%s where product_id=%s;'
     curr.execute(query, values)
     connect.commit()
+
+#remaining stock for a product (stock entries minus sales) / researched
+def get_remaining_stock(product_id):
+# used COALESCE to get 0 instead of craashing when no stock exist
+    query = 'select COALESCE(sum(stock_quantity),0) from stock where product_id=%s;'
+    curr.execute(query, (product_id,))
+    stock_sum = curr.fetchone()[0] or 0
+    query2 = 'select COALESCE(sum(quantity),0) from sales where product_id=%s;'
+    curr.execute(query2, (product_id,))
+    sales_sum = curr.fetchone()[0] or 0
+    return int(stock_sum) - int(sales_sum)
 
 # def card_profit():
 #     query = 'select sum(p.selling_price-p.buying_price) as total_sales from sales as s inner join' \
