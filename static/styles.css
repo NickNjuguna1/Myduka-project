@@ -48,6 +48,20 @@ html {
   transition: transform 0.15s ease;
 }
 
+/* Floating animation for login box */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.login-float {
+  animation: float 3s ease-in-out infinite;
+}
+
 /* Hovers seperated for a smooth transition effect */
 .nav-link:hover {
   transform: scale(1.08);

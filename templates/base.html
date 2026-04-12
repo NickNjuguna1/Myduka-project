@@ -16,6 +16,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        #typewriter-text {
+            transition: opacity 0.5s ease-in-out;
+        }
+        .fade-out {
+            opacity: 0;
+        }
+        .fade-in {
+            opacity: 1;
+        }
+    </style>
     <title>MyDuka</title>
 </head>
 
@@ -24,7 +35,7 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-between">
         <div class="container fixed-top bg-light">
             <a class="navbar-brand ms-5 fs-3 fw-bold" href="/" style="color: crimson;"><span style="color: black;"><i
-                        class="fa-solid fa-basket-shopping fs-4"></i></span>MyDuka <sup
+                        class="fa-solid fa-basket-shopping fs-4"></i></span><span id="typewriter-text">MyDuka</span> <sup
                     style="color: black;">Ke</sup></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,6 +45,7 @@
                 <div class="navbar-nav me-5 fs-5">
                     <a class="nav-link me-4" aria-current="page" href="/">Home <sub><i class="fa-regular fa-house fs-4"
                                 style="color: crimson;"></i></sub></a>
+                    {% if 'email' in session %}
                     <a class="nav-link me-4" href="/products" role="button" aria-expanded="false" style="color: black;">
                         Products
                     </a>
@@ -47,6 +59,7 @@
                         style="color: black;">
                         Dashboard
                     </a>
+                    {% endif %}
                     {% if 'email' not in session %}
                     <a class="sign_up nav-link me-4 btn btn-lg px-4 py-2"
                         style="background-color:#007BFF; color: white;" id="login-btn" href="/login" role="button"
@@ -111,7 +124,44 @@
     <script src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
 
 
-    <script>{% block script %} {% endblock %}</script>
+    <script>{% block script %} {% endblock %}
+    // Typewriter effect for MyDuka
+    document.addEventListener('DOMContentLoaded', function() {
+        const textElement = document.getElementById('typewriter-text');
+        const text = 'MyDuka';
+        let index = 0;
+        let isDeleting = false;
+
+        function typeWriter() {
+            if (!isDeleting) {
+                textElement.textContent = text.substring(0, index + 1);
+                index++;
+                if (index === text.length) {
+                    isDeleting = true;
+                    setTimeout(typeWriter, 2000); // Wait 2 seconds before starting to delete
+                    return;
+                }
+            } else {
+                textElement.textContent = text.substring(0, index);
+                index--;
+                if (index === 0) {
+                    isDeleting = false;
+                    textElement.classList.add('fade-out');
+                    setTimeout(() => {
+                        textElement.classList.remove('fade-out');
+                        textElement.classList.add('fade-in');
+                        setTimeout(typeWriter, 500); // Wait for fade-in before starting again
+                    }, 500);
+                    return;
+                }
+            }
+            setTimeout(typeWriter, isDeleting ? 100 : 200);
+        }
+
+        // Start the typewriter effect
+        typeWriter();
+    });
+    </script>
     <!-- Footer -->
     <footer class="text-center text-lg-start bg-body-tertiary text-muted">
         <section class="">

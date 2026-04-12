@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
+<br>
+<p id="welcome-message" class="text-center fs-5 bg-light container pt-2">Welcome to your dashboard! Here you can view your sales, stock, and profit information. <br> <br></p>
 <div>
     <div class="d-flex justify-content-center row">
         <div class="card mx-3 col-md-3 col-lg-4 col-xl-3" style="width: 18rem;">
@@ -234,4 +236,10 @@ text: 'Profit per Day'
 }
 }
 });
+
+// Hide welcome message after 2 minutes
+setTimeout(function() {
+    document.getElementById('welcome-message').style.display = 'none';
+}, 120000);
+
 {% endblock %}
