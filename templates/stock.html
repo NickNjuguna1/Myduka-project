@@ -1,7 +1,9 @@
 {% extends "base.html" %}
+{% block footer %}{% endblock %}
 {% block content %}
+<div style="background: white; min-height: 100vh; padding: 1rem 0 2rem;">
 <br>
-<p class="text-center fs-5 bg-light container pt-2">This page is for stock management. You can add, edit and delete stock here. <br> <br></p>
+<p class="text-center fs-5 bg-light container pt-2">Welcome to your Stock! You can add, edit and delete stock with ease. <br> <br></p>
 <!-- Button trigger modal -->
 <button type="button" class="ms-5 btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
     <i class="fa-solid fa-plus"></i> New Stock
@@ -51,6 +53,7 @@
         </table>
     </div>
 </div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -66,6 +69,17 @@
 
 {% block script %}
 let table = new DataTable('#myTable');
+
+setTimeout(function() {
+    const welcome = document.querySelector('p.text-center.fs-5.bg-light.container.pt-2');
+    if (welcome) {
+        welcome.style.transition = 'opacity 0.8s ease';
+        welcome.style.opacity = '0';
+        setTimeout(function() {
+            welcome.style.display = 'none';
+        }, 800);
+    }
+}, 10000);
 {% endblock %}
 
 </html>

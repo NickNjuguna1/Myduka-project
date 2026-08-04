@@ -1,7 +1,9 @@
 {% extends "base.html" %}
+{% block footer %}{% endblock %}
 {% block content %}
+<div style="background: white; min-height: 100vh; padding: 1rem 0 2rem;">
 <br>
-<p id="welcome-message" class="text-center fs-5 bg-light container pt-2">Welcome to your dashboard! Here you can view your sales, stock, and profit information. <br> <br></p>
+<p id="welcome-message" class="text-center fs-5 bg-light container pt-2">Welcome to your Dashboard! Here you can view your sales, stock, and profit information. <br> <br></p>
 <div>
     <div class="d-flex justify-content-center row">
         <div class="card mx-3 col-md-3 col-lg-4 col-xl-3" style="width: 18rem;">
@@ -237,9 +239,28 @@ text: 'Profit per Day'
 }
 });
 
-// Hide welcome message after 2 minutes
+// Hide welcome message after 10 seconds with a smooth fade-out
 setTimeout(function() {
-    document.getElementById('welcome-message').style.display = 'none';
-}, 120000);
+    const welcome = document.getElementById('welcome-message');
+    if (welcome) {
+        welcome.style.transition = 'opacity 0.8s ease';
+        welcome.style.opacity = '0';
+        setTimeout(function() {
+            welcome.style.display = 'none';
+        }, 800);
+    }
+}, 10000);
+
+// Hide the login success flash message after 10 seconds with a smooth fade-out
+setTimeout(function() {
+    const alerts = document.querySelectorAll('.alert');
+    alerts.forEach(function(alert) {
+        alert.style.transition = 'opacity 0.8s ease';
+        alert.style.opacity = '0';
+        setTimeout(function() {
+            alert.style.display = 'none';
+        }, 800);
+    });
+}, 10000);
 
 {% endblock %}

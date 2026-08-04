@@ -1,7 +1,9 @@
 {% extends "base.html" %}
+{% block footer %}{% endblock %}
 {% block content %}
+<div style="background: white; min-height: 100vh; padding: 1rem 0 2rem;">
 <br>
-<p class="text-center fs-5 bg-light container pt-2">This page is for sales. You can add and view sales here. <br> <br></p>
+<p class="text-center fs-5 bg-light container pt-2">Welcome to your Sales! You can add and view sales with ease. <br> <br></p>
 <!-- Button trigger modal -->
 <button type="button" class="ms-5 btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
     <i class="fa-solid fa-plus"></i> New Sale
@@ -68,6 +70,17 @@
 {% endblock %}
 {% block script %}
 let table = new DataTable('#myTable');
+
+setTimeout(function() {
+    const welcome = document.querySelector('p.text-center.fs-5.bg-light.container.pt-2');
+    if (welcome) {
+        welcome.style.transition = 'opacity 0.8s ease';
+        welcome.style.opacity = '0';
+        setTimeout(function() {
+            welcome.style.display = 'none';
+        }, 800);
+    }
+}, 10000);
 
 document.addEventListener('DOMContentLoaded', () => {
     const select = document.getElementById('product_id');

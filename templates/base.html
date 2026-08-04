@@ -30,7 +30,7 @@
     <title>MyDuka</title>
 </head>
 
-<body class="body" style="background-color: gainsboro;">
+<body class="body" style="background-color: white;">
     <!-- Template Inheritance - Parent -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-between">
         <div class="container fixed-top bg-light">
@@ -162,12 +162,13 @@
         typeWriter();
     });
     </script>
+    {% block footer %}
     <!-- Footer -->
-    <footer class="text-center text-lg-start bg-body-tertiary text-muted">
+    <footer class="text-center text-lg-start text-muted" style="background-color: white;">
         <section class="">
-            <div class="container-fluid text-center text-md-start mt-5">
+`            <div class="container-fluid text-center text-md-start mt-5">
                 <!-- Grid row -->
-                <div class="row mt-3" style="background-color: gainsboro;">
+                <div class="row mt-3" style="background-color: white;">
                     <!-- Grid column -->
                     <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                         <a class="nav-link ms-5 fs-4 fw-bold" href="/" style="color: crimson;"><span
@@ -205,8 +206,8 @@
                         <!-- Links -->
                         <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
                         <p>
-                            <a href="mailto:irungunickson91@gmail.com" class="contact"><i class="fas fa-envelope me-3"></i>
-                                irungunickson91@gmail.com</a>
+                            <a href="mailto:nickkirungu@gmail.com" class="contact"><i class="fas fa-envelope me-3"></i>
+                                nickkirungu@gmail.com</a>
                         </p>
                         <p><a href="tel:+254782009754" class="contact"><i class="fas fa-phone me-3"></i> +254 782 009 754</a> </p>
                     </div>
@@ -233,6 +234,11 @@
         <!-- Copyright -->
     </footer>
     <!-- Footer -->
+    {% endblock %}
+    <!-- WhatsApp floating button -->
+    <a href="https://wa.me/254782009754" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+    </a>
 </body>
 
 </html>

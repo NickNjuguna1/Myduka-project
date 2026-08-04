@@ -116,7 +116,7 @@ def insert_stock(values):
 # Profit per Product(profit=(selling price - buying price)*quantity)
 def product_profit():
     query = 'select p.name, p.product_id, sum((selling_price-buying_price)*s.quantity) as profit ' \
-    'from sales as s inner join products as p on s.product_id = p.product_id group by p.name, p.product_id'
+        'from sales as s inner join products as p on s.product_id = p.product_id group by p.name, p.product_id'
     curr.execute(query)
     profit = curr.fetchall()
     return profit
@@ -133,64 +133,79 @@ def sales_sum():
     sum = curr.fetchall()
     return sum
 
+
 def products_sales():
     query = 'select p.name, sum(p.selling_price*s.quantity) as total_sales from sales ' \
-    'as s inner join products as p on s.product_id=p.product_id group by p.name, p.product_id;'
+        'as s inner join products as p on s.product_id=p.product_id group by p.name, p.product_id;'
     curr.execute(query)
     sale = curr.fetchall()
     return sale
 
 # Sales per Day Function
+
+
 def day_sales():
     query = 'select date(s.created_at), ' \
-    'sum(p.selling_price*s.quantity) as total_sales from sales as s inner join' \
-    ' products as p on s.product_id=p.product_id group by date(s.created_at);'
+        'sum(p.selling_price*s.quantity) as total_sales from sales as s inner join' \
+        ' products as p on s.product_id=p.product_id group by date(s.created_at);'
     curr.execute(query)
     day_sale = curr.fetchall()
-    return day_sale 
+    return day_sale
 
 # profit per Day
+
+
 def daily_profits():
     query = 'select date(s.created_at), ' \
-    'sum(p.selling_price-p.buying_price) as total_sales from sales as s inner join' \
-    ' products as p on s.product_id=p.product_id group by date(s.created_at);'
+        'sum(p.selling_price-p.buying_price) as total_sales from sales as s inner join' \
+        ' products as p on s.product_id=p.product_id group by date(s.created_at);'
     curr.execute(query)
     day_profit = curr.fetchall()
     return day_profit
 
+
 def insert_users(user_values):
     query = "insert into users (full_name, email, password) values(%s,%s,%s);"
-    curr.execute(query,user_values)
+    curr.execute(query, user_values)
     connect.commit()
 
-    
+
 my_sum = sales_sum()
 # print(f'My sum is {my_sum}')
 
 # Check if user exists
+
+
 def check_email(email):
     query = 'select * from users where email=%s'
-    curr.execute(query,(email,))
+    curr.execute(query, (email,))
     data = curr.fetchone()
     return data
 
 # Sales card on Dashboard
+
+
 def total_sales():
     query = 'select sum(selling_price*quantity) from products inner join sales on sales.product_id=products.product_id;'
     curr.execute(query)
     data = curr.fetchone()
     return data[0]
 
+
 print(total_sales())
 
 # Profit card on Dashboard
+
+
 def total_profits():
     query = 'select sum((selling_price-buying_price)*quantity) from products inner join sales on sales.product_id=products.product_id;'
     curr.execute(query)
     data = curr.fetchone()
     return data[0]
 
-#Stock card on Dashboard
+# Stock card on Dashboard
+
+
 def total_stocks():
     query = 'select sum(stock_quantity) from stock;'
     curr.execute(query)
@@ -198,32 +213,39 @@ def total_stocks():
     return data[0]
 
 # Product with the most profit card on dashboard
+
+
 def highest_profit_product():
     query = 'select p.name, p.product_id, sum((selling_price-buying_price)*s.quantity) ' \
-    'as profit from sales s inner join products p on s.product_id = p.product_id group by p.name, p.product_id order by profit desc limit 1;'
+        'as profit from sales s inner join products p on s.product_id = p.product_id group by p.name, p.product_id order by profit desc limit 1;'
     curr.execute(query)
-    data = curr.fetchone()   
+    data = curr.fetchone()
     return data[0]
+
 
 def delete_product(product_id):
     query = 'delete from products where product_id=%s;'
-    curr.execute(query,(product_id,))
+    curr.execute(query, (product_id,))
     connect.commit()
+
 
 def fetch_product(product_id):
     query = 'select * from products where product_id=%s;'
-    curr.execute(query,(product_id,))
+    curr.execute(query, (product_id,))
     product = curr.fetchone()
     return product
+
 
 def update_product(values):
     query = 'update products set name=%s, buying_price=%s, selling_price=%s where product_id=%s;'
     curr.execute(query, values)
     connect.commit()
 
-#remaining stock for a product (stock entries minus sales) / researched
+# remaining stock for a product (stock entries minus sales) / researched
+
+
 def get_remaining_stock(product_id):
-# used COALESCE to get 0 instead of craashing when no stock exist
+    # used COALESCE to get 0 instead of craashing when no stock exist
     query = 'select COALESCE(sum(stock_quantity),0) from stock where product_id=%s;'
     curr.execute(query, (product_id,))
     stock_sum = curr.fetchone()[0] or 0
@@ -238,5 +260,3 @@ def get_remaining_stock(product_id):
 #     curr.execute(query)
 #     day_profits = curr.fetchall()
 #     return day_profits
-
-

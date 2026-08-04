@@ -152,3 +152,200 @@ brand_footer:hover{
 .card{
   background-color:#F0FFFF;
 }
+
+/* Floating WhatsApp button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  background: #25D366;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(37,211,102,0.25);
+  z-index: 1050;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.whatsapp-float i { font-size: 24px; }
+.whatsapp-float:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(37,211,102,0.28); }
+
+@media (max-width: 480px) {
+  .whatsapp-float { width: 48px; height: 48px; bottom: 16px; right: 16px; }
+  .whatsapp-float i { font-size: 20px; }
+}
+
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.success {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.card {
+  transition: 0.4s;
+}
+.card:hover {
+  transform: scale(1.15);
+}
+
+.sign_up{
+  transition: 0.3s;
+}
+
+.sign_up:hover{
+  transform: scale(1.15);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+.navbar-brand:hover {
+  transform: scale(1.08);
+
+}
+.navbar-brand {
+  transition: transform 0.15s ease;
+}
+
+/* Floating animation for login box */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.login-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Hovers seperated for a smooth transition effect */
+.nav-link:hover {
+  transform: scale(1.08);
+}
+.nav-link {
+  transition: transform 0.15s ease;
+}
+.carousel-caption {
+  bottom: 5%;
+}
+
+.steps:hover {
+  transform: scale(1.05);
+}
+.steps {
+  transition: transform 0.3s;
+}
+
+/* Show Features Button on Footer Clearly */
+#features {
+  scroll-margin-top: 130px;
+}
+#start {
+  scroll-margin-top: 250px;
+}
+
+brand_footer{
+  transition: transform 0.3s;
+}
+brand_footer:hover{
+  transform: scale(1.05);
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px;       /* adjust to taste */
+  object-fit: cover;
+  display: block;
+}
+
+#pricing{
+  scroll-margin-top: 130px;
+}
+
+.auth{
+  padding: 2rem;
+  display: flex;
+  margin: auto;
+  justify-content: space-between;
+  width: 700px;
+  height: 290px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  overflow: hidden;
+}
+
+.auth > * {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.left {
+  background-color: crimson;
+  border-top-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.right {
+  margin-left: 15px;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+.contact {
+  color: black;
+}
+
+.card-title{
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.card{
+  background-color:#F0FFFF;
+}
+
+/* Floating WhatsApp button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  background: #25D366;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(37,211,102,0.25);
+  z-index: 1050;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.whatsapp-float i { font-size: 24px; }
+.whatsapp-float:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(37,211,102,0.28); }
+
+@media (max-width: 480px) {
+  .whatsapp-float { width: 48px; height: 48px; bottom: 16px; right: 16px; }
+  .whatsapp-float i { font-size: 20px; }
+}
