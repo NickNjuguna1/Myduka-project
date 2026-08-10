@@ -1,43 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
-<div id="carouselExampleIndicators" class="carousel container" data-bs-ride="carousel">
-    <div class="carousel-inner image mt-2" data-bs-interval="1000">
+<div id="carouselExampleIndicators" class="carousel hero-carousel container-fluid p-0 mt-0" data-bs-ride="carousel" data-bs-interval="5000">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner image mt-2">
         <div class="carousel-item active">
-            <img src="../static/images/POS1.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-block">
-                <h5 class="fs-2 fw-bolder text-uppercase mb-1 "
-                    style="background-color:crimson; color: rgb(234, 234, 234);">
-                    Experience innovation and
-                    smooth operations with MyDuka POS</h5>
-                <a href="/register"><button type="submit"
-                        class="sign_up btn btn-lg btn-outline-primary text-light text-uppercase fs-4 px-4 py-2 mt-5">Sign
-                        up now >
-                    </button></a>
+            <img src="../static/images/POS1.jpg" class="d-block w-100" alt="Modern POS checkout screen">
+            <div class="carousel-caption d-flex align-items-end justify-content-start">
+                <div class="caption-shell">
+                    <h5 class="fs-2 fw-bolder text-uppercase mb-2">Experience innovation and smooth operations with MyDuka POS</h5>
+                    <p class="mb-3">Fast checkout, smart reports, and a cheerful workflow for every busy shop.</p>
+                    <a href="{{ url_for('register') }}" class="btn sign_up btn-lg btn-outline-light text-uppercase fs-5 px-4 py-2">Sign up now</a>
+                </div>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="../static/images/POS2.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-block">
-                <h5 class="fs-2 fw-bold text-uppercase" style="background-color: crimson; color:rgb(234, 234, 234) ;">
-                    Experience innovation and
-                    smooth operations with MyDuka POS</h5>
-                <a href="/register"><button type="submit"
-                        class="sign_up btn btn-lg btn-outline-primary text-light text-uppercase fs-4 px-4 py-2 mt-5">Sign
-                        up now >
-                    </button></a>
+            <img src="../static/images/POS2.jpg" class="d-block w-100" alt="Retail inventory management dashboard">
+            <div class="carousel-caption d-flex align-items-end justify-content-start">
+                <div class="caption-shell">
+                    <h5 class="fs-2 fw-bolder text-uppercase mb-2">Stay ahead with simple stock tracking and live sales insight</h5>
+                    <p class="mb-3">Give your team the confidence to serve customers faster and smarter.</p>
+                    <a href="{{ url_for('register') }}" class="btn sign_up btn-lg btn-outline-light text-uppercase fs-5 px-4 py-2">Sign up now</a>
+                </div>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="../static/images/POS3.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-block">
-                <h5 class="fs-2 fw-bold text-uppercase" style="background-color: crimson; color: rgb(234, 234, 234);">
-                    Experience innovation and
-                    smooth operations with MyDuka POS</h5>
-                <div class="d-flex justify-content-center">
-                    <a href="/register"><button type="submit"
-                            class="sign_up btn btn-lg btn-outline-primary text-light text-uppercase fs-4 px-4 py-2 mt-5">Sign
-                            up now >
-                        </button></a>
+            <img src="../static/images/POS3.jpg" class="d-block w-100" alt="Store owner using POS system">
+            <div class="carousel-caption d-flex align-items-end justify-content-start">
+                <div class="caption-shell">
+                    <h5 class="fs-2 fw-bolder text-uppercase mb-2">Turn everyday sales into a polished, rewarding experience</h5>
+                    <p class="mb-3">Launch your free trial and bring a modern edge to your business.</p>
+                    <a href="{{ url_for('register') }}" class="btn sign_up btn-lg btn-outline-light text-uppercase fs-5 px-4 py-2">Sign up now</a>
                 </div>
             </div>
         </div>
@@ -55,14 +51,16 @@
 </div>
 <br>
 <br>
-<div style="background-color: #B0C4DE;" class="container-fluid" id="features">
-    <div class="fs-3 text-center fw-bold mb-4">
-        Our Features at a Glance!
+<div class="container-fluid premium-features-section" id="features">
+    <div class="features-heading text-center">
+        <p class="eyebrow">Why teams love MyDuka</p>
+        <h2 class="fs-2 fw-bold mb-3">Our Features at a Glance!</h2>
+        <p class="features-subtitle">Everything you need to run a modern shop with clarity, speed, and confidence.</p>
     </div>
     <div class="container">
         <div class="row justify-content-center g-4 equal-cards">
             <div class="col-md-3 col-lg-4 col-xl-3">
-                <div class="card mx-1 mb-2 rounded-4 w-100 h-100">
+                <div class="feature-card card mx-1 mb-2 rounded-4 w-100 h-100">
                     <div class="card-body fw-bold fs-5 text-center">Sales Reporting and Analytics</div>
                     <p class="card-text text-center pb-3 mx-3">Detailed insights into sales performance, inventory
                         turnover, and customer
@@ -71,7 +69,7 @@
                 </div>
             </div>
             <div class="col-md-3 col-lg-4 col-xl-3">
-                <div class="card mx-1 mb-2 rounded-4 w-100 h-100">
+                <div class="feature-card card mx-1 mb-2 rounded-4 w-100 h-100">
                     <img src="../static/images/crm.jpg" class="card-img-top" alt="...">
                     <div class="card-body fw-bold fs-5 text-center">Customer Relationship Management (CRM)</div>
                     <p class="card-text text-center pb-3 mx-3">Create customer profiles, track purchase history, and
@@ -79,7 +77,7 @@
                 </div>
             </div>
             <div class="col-md-3 col-lg-4 col-xl-3">
-                <div class="card mx-1 mb-2 rounded-4 w-100 h-100">
+                <div class="feature-card card mx-1 mb-2 rounded-4 w-100 h-100">
                     <div class="card-body fw-bold fs-5 text-center">Cloud-based Access</div>
                     <p class="card-text text-center pb-3 mx-3">Allows remote access to sales, inventory, and customer
                         data
@@ -90,7 +88,7 @@
                 </div>
             </div>
             <div class="col-md-3 col-lg-4 col-xl-3">
-                <div class="card mx-1 mb-2 rounded-4 w-100 h-100">
+                <div class="feature-card card mx-1 mb-2 rounded-4 w-100 h-100">
                     <img src="../static/images/ui.jpg" class="card-img-top" alt="...">
                     <div class="card-body fw-bold fs-5 text-center">User-friendly Interface</div>
                     <p class="card-text text-center pb-3 mx-3">Easy to learn and use, minimizing staff training time and
@@ -100,7 +98,7 @@
             </div>
         </div>
     </div>
-    <div class="d-flex justify-content-center fs-4 fw-bold mt-5 text-center" style="background-color: #B0C4DE;">
+    <div class="features-footer text-center mt-5">
         Experience our FREE trial and have more exclusive features designed to elevate your success
     </div>
     <br>
@@ -115,7 +113,7 @@
             <i class="fa-solid fa-1 fs-4"></i>
             <p class="fw-bold fs-3">Sign up for FREE</p>
             <p class="fs-5">Register your account visa free and login</p>
-            <a href="/register"><button class="sign_up btn btn-primary text-uppercase fs-4 px-4 py-2"
+            <a href="{{ url_for('register') }}"><button class="sign_up btn btn-primary text-uppercase fs-4 px-4 py-2"
                     style="background-color: #007BFF;">Register Now >
                 </button></a>
         </div>
@@ -187,7 +185,7 @@
                             </li>
                         </ul>
 
-                        <a class="btn btn-lg btn-outline-primary w-100 mt-auto" href="/register">
+                        <a class="btn btn-lg btn-outline-primary w-100 mt-auto" href="{{ url_for('register') }}">
                             Get started
                         </a>
                     </div>
@@ -241,7 +239,7 @@
                             </li>
                         </ul>
 
-                        <a class="btn btn-lg btn-primary w-100 mt-auto" href="/register">
+                        <a class="btn btn-lg btn-primary w-100 mt-auto" href="{{ url_for('register') }}">
                             Get started
                         </a>
                     </div>
@@ -257,7 +255,7 @@
             Make sales interesting and FUN with MyDuka POS
         </div> <br>
         <div>
-            <a href="/register"><button class="sign_up btn btn-lg fs-4 px-4 py-2"
+            <a href="{{ url_for('register') }}"><button class="sign_up btn btn-lg fs-4 px-4 py-2"
                     style="background-color: crimson; color: whitesmoke;">Get Started > </button></a>
         </div> <br>
         <div>
