@@ -13,7 +13,7 @@
                 <div class="caption-shell">
                     <h5 class="fs-2 fw-bolder text-uppercase mb-2">Experience innovation and smooth operations with MyDuka POS</h5>
                     <p class="mb-3">Fast checkout, smart reports, and a cheerful workflow for every busy shop.</p>
-                    <a href="{{ url_for('register') }}" class="btn sign_up btn-lg btn-outline-light text-uppercase fs-5 px-4 py-2">Sign up now</a>
+                    <a href="{{ url_for('register') }}" class="btn sign_up btn-lg btn-outline-light text-uppercase fs-5 px-4 py-2">Sign up now⚡</a>
                 </div>
             </div>
         </div>
@@ -23,7 +23,7 @@
                 <div class="caption-shell">
                     <h5 class="fs-2 fw-bolder text-uppercase mb-2">Stay ahead with simple stock tracking and live sales insight</h5>
                     <p class="mb-3">Give your team the confidence to serve customers faster and smarter.</p>
-                    <a href="{{ url_for('register') }}" class="btn sign_up btn-lg btn-outline-light text-uppercase fs-5 px-4 py-2">Sign up now</a>
+                    <a href="{{ url_for('register') }}" class="btn sign_up btn-lg btn-outline-light text-uppercase fs-5 px-4 py-2">Sign up now⚡</a>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
                 <div class="caption-shell">
                     <h5 class="fs-2 fw-bolder text-uppercase mb-2">Turn everyday sales into a polished, rewarding experience</h5>
                     <p class="mb-3">Launch your free trial and bring a modern edge to your business.</p>
-                    <a href="{{ url_for('register') }}" class="btn sign_up btn-lg btn-outline-light text-uppercase fs-5 px-4 py-2">Sign up now</a>
+                    <a href="{{ url_for('register') }}" class="btn sign_up btn-lg btn-outline-light text-uppercase fs-5 px-4 py-2">Sign up now⚡</a>
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
 <div class="container-fluid premium-features-section" id="features">
     <div class="features-heading text-center">
         <p class="eyebrow">Why teams love MyDuka</p>
-        <h2 class="fs-2 fw-bold mb-3">Our Features at a Glance!</h2>
+        <h2 class="fs-2 fw-bold mb-3">Our Features at a Glance!✨</h2>
         <p class="features-subtitle">Everything you need to run a modern shop with clarity, speed, and confidence.</p>
     </div>
     <div class="container">
@@ -104,37 +104,52 @@
     <br>
 </div>
 <br> <br>
-<section id="start">
-    <div>
-        <h5 class="fs-2 fw-bold">How to get started with MyDuka POS</h5>
-    </div> <br>
-    <div class="d-flex justify-content-center row">
-        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 steps">
-            <i class="fa-solid fa-1 fs-4"></i>
-            <p class="fw-bold fs-3">Sign up for FREE</p>
-            <p class="fs-5">Register your account visa free and login</p>
-            <a href="{{ url_for('register') }}"><button class="sign_up btn btn-primary text-uppercase fs-4 px-4 py-2"
-                    style="background-color: #007BFF;">Register Now >
-                </button></a>
+<section class="get-started-section" id="start">
+    <div class="container">
+        <div class="get-started-header text-center">
+            <p class="eyebrow">Simple setup</p>
+            <h5 class="fs-2 fw-bold mb-3">How to get started with MyDuka POS🏃‍♂️</h5>
+            <p class="get-started-subtitle">From fresh signup to your first sale, everything is designed to feel effortless.</p>
         </div>
-        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 steps">
-            <i class="fa-solid fa-2 fs-4"></i>
-            <p class="fw-bold fs-3">Set up your Products</p>
-            <p class="fs-5">Add your inventory items on Products tab</p>
+
+        <div class="row justify-content-center g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="step-card steps">
+                    <div class="step-number">01</div>
+                    <div class="step-icon"><i class="fa-solid fa-user-plus"></i></div>
+                    <p class="fw-bold fs-3 mb-2">Sign up for FREE</p>
+                    <p class="fs-5 mb-3">Register your account in minutes and log in to your dashboard.</p>
+                    <a href="{{ url_for('register') }}" class="text-black btn btn-outline-success fs-5 px-4 py-2 mt-auto">
+                        Register now 🚀
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="step-card steps">
+                    <div class="step-number">02</div>
+                    <div class="step-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+                    <p class="fw-bold fs-3 mb-2">Set up your products</p>
+                    <p class="fs-5 mb-0">Add your inventory items on the Products tab and keep stock organized.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="step-card steps">
+                    <div class="step-number">03</div>
+                    <div class="step-icon"><i class="fa-solid fa-cash-register"></i></div>
+                    <p class="fw-bold fs-3 mb-2">Almost done! Try a sale</p>
+                    <p class="fs-5 mb-0">Capture every transaction smoothly from the Sales tab and grow your business.</p>
+                </div>
+            </div>
         </div>
-        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 steps">
-            <i class="fa-solid fa-3 fs-4"></i>
-            <p class="fw-bold fs-3">Almost done! Try making a Sale</p>
-            <p class="fs-5">Capture Sales on Sales tab</p>
-        </div>
-    </div>
     </div>
 </section>
 <section class="py-3" id="pricing">
     <div class="container">
         <div class="row justify-content-center mb-4">
             <div class="col-12 col-md-10 col-lg-8 col-xl-6 text-center">
-                <h2 class="display-5 fw-bold">Pricing plans</h2>
+                <h2 class="display-5 fw-bold">Pricing plans👥</h2>
                 <p class="fs-5">Start with essential features in our FREE package—perfect for getting your feet wet. Or level up to Business Package mastery, where you call the shots as a full admin and drive real impact.</p>
             </div>
         </div>
@@ -252,11 +267,11 @@
     <div class="fs-2 text-center" class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4"
         style="background-color:#E6E6FA; color: black;"> <br>
         <div>
-            Make sales interesting and FUN with MyDuka POS
+            Make sales interesting & FUN with MyDuka POS💰
         </div> <br>
         <div>
             <a href="{{ url_for('register') }}"><button class="sign_up btn btn-lg fs-4 px-4 py-2"
-                    style="background-color: crimson; color: whitesmoke;">Get Started > </button></a>
+                    style="background-color: crimson; color: whitesmoke;">Get Started 🚀 </button></a>
         </div> <br>
         <div>
             Already have an account? <a class="icon-link icon-link-hover" href="/login">
