@@ -1,18 +1,49 @@
 {% extends "base.html" %}
 {% block content %}
-<br>
-<div class="text-center w-50 auth login-float">
-    <div class="left fs-4" style="background-color: crimson; color: whitesmoke;">
-        <p> Please enter your details to create an
-            account! </p>
+<main class="login-page register-page">
+    <div class="login-card register-card">
+        <section class="login-card__welcome">
+            <div class="login-card__brand-mark"><i class="fa-solid fa-basket-shopping"></i></div>
+            <p class="login-card__eyebrow">Start smarter</p>
+            <h1>Make every sale count.</h1>
+            <p class="login-card__welcome-copy">Build a clearer view of your shop and give your business room to grow.</p>
+            <div class="login-card__rule"></div>
+            <p class="login-card__prompt">Already have an account?</p>
+            <a class="login-card__secondary-link" href="{{ url_for('login') }}">Sign in instead <i class="fa-solid fa-arrow-right"></i></a>
+        </section>
+        <section class="login-card__form-panel">
+            <div class="login-card__form-heading">
+                <p class="login-card__eyebrow">Create your workspace</p>
+                <h2>Join MyDuka</h2>
+                <p>Set up your account and start running your duka with confidence.</p>
+            </div>
+            <form action="/register" method="POST" class="login-form">
+                <div class="login-form__field">
+                    <label for="fullname">Full name</label>
+                    <div class="login-form__input-wrap">
+                        <i class="fa-regular fa-user" aria-hidden="true"></i>
+                        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" autocomplete="name" required>
+                    </div>
+                </div>
+                <div class="login-form__field">
+                    <label for="email">Email address</label>
+                    <div class="login-form__input-wrap">
+                        <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+                    </div>
+                </div>
+                <div class="login-form__field">
+                    <label for="password">Password</label>
+                    <div class="login-form__input-wrap">
+                        <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                        <input type="password" id="password" name="password" placeholder="Create a password" autocomplete="new-password" required>
+                    </div>
+                </div>
+                <button type="submit" class="login-form__submit">Create account <i class="fa-solid fa-arrow-right"></i></button>
+            </form>
+        </section>
     </div>
-    <form action="/register" class="form-control col-md-3 col-lg-4 col-xl-3 right" method="POST">
-        <input type="text" id="fullname" name="fullname" class="mt-3 form-control" placeholder="Enter your full name"> <br>
-        <input type="email" id="email" name="email" placeholder="Enter email address" class="form-control"> <br>
-        <input type="password" id="password" name="password" placeholder="Enter password" class="form-control"> <br>
-        <button type="submit" class="btn btn-primary ">Click to Register</button>
-    </form>
-</div>
+</main>
 {% endblock %}
 {% block script %}
 let table = new DataTable('#myTable');

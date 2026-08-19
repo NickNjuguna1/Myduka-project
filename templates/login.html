@@ -1,26 +1,42 @@
 {% extends "base.html" %}
 {% block content %}
-<br>
-<div class="auth w-50 login-float">
-    <div class="left">
-        <div style="color: whitesmoke;" class="text-center mt-5">
-            <h2> Hello! Welcome </h2>
-            <p> Don't have an account? </p>
-            <a href="{{ url_for('register') }}"><button type="submit" class="btn btn-primary sign_up fs-5">Register > </button></a>
-        </div>
-    </div>
-    <div class="right form-control col-md-3 col-lg-4 col-xl-3">
-        <div>
-            <form action="/login" method="POST"> <br>
-                <input type="text" id="email" name="email" placeholder="Enter existing email" class="form-control"><i
-                    class="fa-regular fa-user"></i><br>
-                <input type="password" id="password" name="password" class="form-control"
-                    placeholder="Enter existing password"><i class="fa-solid fa-lock"></i><br>
-                <button type="submit" class="btn btn-outline-primary px-4 py-2 container">Login</button>
+<main class="login-page">
+    <div class="login-card">
+        <section class="login-card__welcome">
+            <div class="login-card__brand-mark"><i class="fa-solid fa-basket-shopping"></i></div>
+            <p class="login-card__eyebrow">Welcome back</p>
+            <h1>Run your duka with confidence.</h1>
+            <p class="login-card__welcome-copy">Pick up where you left off with clear sales, stock, and business insights.</p>
+            <div class="login-card__rule"></div>
+            <p class="login-card__prompt">New to MyDuka?</p>
+            <a class="login-card__secondary-link" href="{{ url_for('register') }}">Create an account <i class="fa-solid fa-arrow-right"></i></a>
+        </section>
+        <section class="login-card__form-panel">
+            <div class="login-card__form-heading">
+                <p class="login-card__eyebrow">Secure access</p>
+                <h2>Sign in to MyDuka</h2>
+                <p>Enter your details to continue to your workspace.</p>
+            </div>
+            <form action="/login" method="POST" class="login-form">
+                <div class="login-form__field">
+                    <label for="email">Email address</label>
+                    <div class="login-form__input-wrap">
+                        <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+                    </div>
+                </div>
+                <div class="login-form__field">
+                    <label for="password">Password</label>
+                    <div class="login-form__input-wrap">
+                        <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" autocomplete="current-password" required>
+                    </div>
+                </div>
+                <button type="submit" class="login-form__submit">Login <i class="fa-solid fa-arrow-right"></i></button>
             </form>
-        </div>
+        </section>
     </div>
-</div>
+</main>
 {% endblock %}
 
 {% block script %}

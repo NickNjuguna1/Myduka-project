@@ -43,8 +43,7 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                 <div class="navbar-nav me-5 fs-5">
-                    <a class="nav-link me-4" aria-current="page" href="/">Home <sub><i class="fa-regular fa-house fs-4"
-                                style="color: crimson;"></i></sub></a>
+                    <a class="nav-link me-4" aria-current="page" href="/">Home </a>
                     {% if 'email' in session %}
                     <a class="nav-link me-4" href="/products" role="button" aria-expanded="false" style="color: black;">
                         Products
@@ -163,74 +162,47 @@
     </script>
     {% block footer %}
     <!-- Footer -->
-    <footer class="text-center text-lg-start text-muted" style="background-color: white;">
-        <section class="">
-`            <div class="container-fluid text-center text-md-start mt-5">
-                <!-- Grid row -->
-                <div class="row mt-3" style="background-color: white;">
-                    <!-- Grid column -->
-                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                        <a class="nav-link ms-5 fs-4 fw-bold" href="/" style="color: crimson;"><span
-                                style="color: black;"><i class="fa-solid fa-basket-shopping fs-4"></i></span>MyDuka<sup
-                                style="color: black;">🇰🇪</sup></a> <br>
-                        <p style="color: black;">
-                            Unlock effortless sales and grow smarter—your business' new best friend is here with our
-                            POS!
-                        </p>
-                    </div>                    
-                     <!-- Grid column -->
-                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4" style="color: black;"> <br>
-                        <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">
-                            Useful links
-                        </h6>
-                        <p>
-                            <!-- / added to route the footer buttons when on different pages -->
-                            <a href="/#features" class="text-reset">Features</a>
-                        </p>
-                        <p>
-                            <a href="/#start" class="text-reset">Steps</a>
-                        </p>
-                        <p>
-                            <a href="{{ url_for('register') }}" class="text-reset">Jump in</a>
-                        </p>
-                        <p>
-                            <a href="/#pricing" class="text-reset">Pricing</a>
-                        </p>
-                    </div>
-                    <!-- Grid column -->
-
-                    <!-- Grid column -->
-                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4 "> <br>
-                        <!-- Links -->
-                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-                        <p>
-                            <a href="mailto:nickkirungu@gmail.com" class="contact"><i class="fas fa-envelope me-3"></i>
-                                nickkirungu@gmail.com</a>
-                        </p>
-                        <p><a href="tel:+254782009754" class="contact"><i class="fas fa-phone me-3"></i> +254 782 009 754</a> </p>
-                    </div>
-                    <div>
-                        <div class="fs-4 text-center">
-                            <a href="#"><i class="fab fa-facebook-f mx-2" style="color: #1877F2;"></i></a>
-                            <a href="#"><i class="fab fa-twitter mx-2" style="color: #1DA1F2;"></i></a>
-                            <a href="#"><i class="fa-brands fa-instagram mx-2" style="color: #833AB4;"></i></a>
-                            <a href="#"><i class="fab fa-linkedin mx-2" style="color: #0077B5;"></i></a>
-                        </div>
-                        <div class="text-center p-4">
-                            © 2026 Copyright:
-                            <a class="text-reset fw-bold" href="#"> <span style="color: crimson;">MyDuka</span></a>
-                        </div>
-                        <!-- Grid column -->
-                    </div>
-                    <!-- Grid row -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="site-footer__main row g-5">
+                <div class="col-lg-5">
+                    <a class="site-footer__brand" href="/">
+                        <span class="site-footer__brand-mark"><i class="fa-solid fa-basket-shopping"></i></span>
+                        <span>MyDuka</span><sup>Ke</sup>
+                    </a>
+                    <p class="site-footer__intro">Simple tools for sharper stock control, smoother sales, and a
+                        duka that keeps moving forward.</p>
+                    <a class="site-footer__cta" href="{{ url_for('register') }}">Start growing <i
+                            class="fa-solid fa-arrow-right"></i></a>
                 </div>
-        </section>
-        <!-- Section: Links  -->
-
-        <!-- Copyright -->
-
-        <!-- Copyright -->
+                <div class="col-6 col-lg-3">
+                    <h6 class="site-footer__heading">Explore</h6>
+                    <nav class="site-footer__links" aria-label="Footer navigation">
+                        <a href="/#features">Features</a>
+                        <a href="/#start">How it works</a>
+                        <a href="{{ url_for('register') }}">Get started</a>
+                        <a href="/#pricing">Pricing</a>
+                    </nav>
+                </div>
+                <div class="col-6 col-lg-4">
+                    <h6 class="site-footer__heading">Let’s talk</h6>
+                    <div class="site-footer__contact">
+                        <a href="mailto:nickkirungu@gmail.com"><i class="fas fa-envelope"></i>nickkirungu@gmail.com</a>
+                        <a href="tel:+254782009754"><i class="fas fa-phone"></i>+254 782 009 754</a>
+                    </div>
+                    <div class="site-footer__socials" aria-label="Social links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/nickson-irungu-a27466306/" target="_blank"  aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="site-footer__bottom">
+                <span>© 2026 MyDuka</span>
+                <span>Built for ambitious dukas <i class="fa-solid fa-heart"></i></span>
+            </div>
+        </div>
     </footer>
     <!-- Footer -->
     {% endblock %}
