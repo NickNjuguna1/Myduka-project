@@ -160,6 +160,35 @@
         typeWriter();
     });
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const liveClock = document.getElementById('live-clock');
+            const liveDate = document.getElementById('live-date');
+
+            if (liveClock) {
+                const updateTime = () => {
+                    const now = new Date();
+                    liveClock.textContent = now.toLocaleTimeString([], {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit'
+                    });
+
+                    if (liveDate) {
+                        liveDate.textContent = now.toLocaleDateString([], {
+                            weekday: 'long',
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric'
+                        });
+                    }
+                };
+
+                updateTime();
+                setInterval(updateTime, 1000);
+            }
+        });
+    </script>
     {% block footer %}
     <!-- Footer -->
     <footer class="site-footer">
@@ -199,7 +228,9 @@
                 </div>
             </div>
             <div class="site-footer__bottom">
-                <span>© 2026 MyDuka</span>
+                <span>© {{ current_year }} MyDuka. All rights reserved.</span>
+                <span id="live-date">{{ current_date }}</span>
+                <span id="live-clock">{{ current_time }}</span>
                 <span>Built for ambitious dukas <i class="fa-solid fa-heart"></i></span>
             </div>
         </div>
