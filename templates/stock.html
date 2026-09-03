@@ -1,39 +1,48 @@
 {% extends "base.html" %}
 {% block footer %}{% endblock %}
 {% block content %}
-<div style="background: white; min-height: 100vh; padding: 1rem 0 2rem;">
+<div style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); min-height: 100vh; padding: 1rem 0 2rem;">
 <br>
-<p class="text-center fs-5 bg-light container pt-2">Welcome to your Stock! You can add, edit and delete stock with ease. <br> <br></p>
+<div class="table-header">
+    <h1 class="table-title"><i class="fa-solid fa-boxes"></i> Stock Management</h1>
+    <p class="table-subtitle">Manage your inventory levels</p>
+</div>
 <!-- Button trigger modal -->
-<button type="button" class="ms-5 btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    <i class="fa-solid fa-plus"></i> New Stock
-</button>
+<div class="ms-5 mb-4">
+    <button type="button" class="premium-add-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <i class="fa-solid fa-plus"></i> Add Stock
+    </button>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color: grey;">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel" style="color: whitesmoke;">Add new stock</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content premium-modal">
+            <div class="modal-header premium-modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                    <i class="fa-solid fa-warehouse"></i> Add New Stock
+                </h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <form action="/add_stock" class="text-center" method="POST">
-                    <input type="number" id="prod_id" name="product_id" class="form-control mx-auto w-50"
-                        placeholder="Enter/Select product_id"> <br>
-                    <input type="number" id="stockq" name="stock_quantity" placeholder="Enter/Select new stock" class="form-control w-50 mx-auto"> <br>
-                    <button type="submit" class="btn btn-primary">Proceed</button>
+            <div class="modal-body premium-modal-body">
+                <form action="/add_stock" class="product-form" method="POST">
+                    <div class="form-group mb-4">
+                        <label for="prod_id" class="form-label">Product ID</label>
+                        <input type="number" id="prod_id" name="product_id" class="form-control premium-input"
+                            placeholder="Enter product ID" required>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="stockq" class="form-label">Stock Quantity</label>
+                        <input type="number" id="stockq" name="stock_quantity" placeholder="Enter stock quantity" class="form-control premium-input" required>
+                    </div>
+                    <button type="submit" class="premium-submit-btn w-100">Add Stock</button>
                 </form>
-            </div>
-            <div class="modal-footer" style="background-color: grey; color: whitesmoke;">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-2 col-lg-3 col-xl-12 mx-auto">
-        <table class="display" id="myTable">
+<div class="products-table-container">
+    <table class="display premium-products-table" id="myTable">
             <thead>
                 <tr>
                     <th>id</th>
@@ -50,7 +59,7 @@
                 </tr>
                 {% endfor %}
             </tbody>
-        </table>
+            </table>
     </div>
 </div>
 </div>

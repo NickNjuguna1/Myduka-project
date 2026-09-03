@@ -1,34 +1,48 @@
 {% extends "base.html" %}
 {% block footer %}{% endblock %}
 {% block content %}
-<div style="background: white; min-height: 100vh; padding: 1rem 0 2rem;">
+<div style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); min-height: 100vh; padding: 1rem 0 2rem;">
 <br>
-<p id="welcome-message" class="text-center fs-5 bg-light container pt-2">Welcome to your Dashboard! Here you can view your sales, stock, and profit information. <br> <br></p>
+<div class="dashboard-header">
+    <h1 class="dashboard-title"><i class="fa-solid fa-chart-pie"></i> Business Dashboard</h1>
+    <p class="dashboard-subtitle">Monitor your sales, stock, and profit metrics in real-time</p>
+</div>
 <div>
     <div class="d-flex justify-content-center row">
-        <div class="card mx-3 col-md-3 col-lg-4 col-xl-3" style="width: 18rem;">
-            <div class="card-body text-center">
-                <h6 class="card-subtitle mt-5 fs-4 text-muted">My Profit</h6>
-                <p class="card_text fs-3" style="color: crimson;">Ksh {{total_profit}}</p>
+        <div class="premium-stat-card">
+            <div class="stat-card-icon profit-icon">
+                <i class="fa-solid fa-money-bill-trend-up"></i>
+            </div>
+            <div class="stat-card-body">
+                <h6 class="stat-card-title">My Profit</h6>
+                <p class="stat-card-value profit-value">Ksh {{total_profit}}</p>
             </div>
         </div>
-        <div class="card mx-3 col-md-3 col-lg-4 col-xl-3" style="width: 18rem;">
-            <div class="card-body text-center">
-                <h6 class="card-subtitle mt-5 fs-4 text-muted">Total Sales</h6>
-                <p class="card-text fs-3" style="color: crimson;">Ksh {{total_sale}}</p>
+        <div class="premium-stat-card">
+            <div class="stat-card-icon sales-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+            <div class="stat-card-body">
+                <h6 class="stat-card-title">Total Sales</h6>
+                <p class="stat-card-value sales-value">Ksh {{total_sale}}</p>
             </div>
         </div>
-        <div class="card mx-3 col-md-3 col-lg-4 col-xl-3" style="width: 18rem;">
-            <div class="card-body text-center">
-                <h6 class="card-subtitle mt-5 fs-4 text-muted">
-                    Stock</h6>
-                <p class="card-text fs-3" style="color: crimson;"> {{total_stock}} Stocked</p>
+        <div class="premium-stat-card">
+            <div class="stat-card-icon stock-icon">
+                <i class="fa-solid fa-boxes-stacked"></i>
+            </div>
+            <div class="stat-card-body">
+                <h6 class="stat-card-title">Total Stock</h6>
+                <p class="stat-card-value stock-value">{{total_stock}} Units</p>
             </div>
         </div>
-        <div class="card mx-3 col-md-3 col-lg-4 col-xl-3" style="width: 18rem;">
-            <div class="card-body text-center">
-                <h6 class="card-subtitle mt-4 fs-4 text-muted">Highest Product Profit</h6>
-                <p class="card-text fs-3" style="color: crimson;"> {{ highest_profit_products }}</p>
+        <div class="premium-stat-card">
+            <div class="stat-card-icon top-icon">
+                <i class="fa-solid fa-star"></i>
+            </div>
+            <div class="stat-card-body">
+                <h6 class="stat-card-title">Top Product</h6>
+                <p class="stat-card-value top-value">{{ highest_profit_products }}</p>
             </div>
         </div>
     </div>

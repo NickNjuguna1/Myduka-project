@@ -1,42 +1,53 @@
 {% extends "base.html" %}
 {% block footer %}{% endblock %}
 {% block content %}
-<div style="background: white; min-height: 100vh; padding: 1rem 0 2rem;">
+<div style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); min-height: 100vh; padding: 1rem 0 2rem;">
 <br>
-<p class="text-center fs-5 bg-light container pt-2">Welcome to your Sales! You can add and view sales with ease. <br> <br></p>
+<div class="table-header">
+    <h1 class="table-title"><i class="fa-solid fa-chart-line"></i> Sales Management</h1>
+    <p class="table-subtitle">Track and manage your sales transactions</p>
+</div>
 <!-- Button trigger modal -->
-<button type="button" class="ms-5 btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    <i class="fa-solid fa-plus"></i> New Sale
-</button>
+<div class="ms-5 mb-4">
+    <button type="button" class="premium-add-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <i class="fa-solid fa-plus"></i> Add New Sale
+    </button>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color: grey; color: whitesmoke;">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add a new sale</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content premium-modal">
+            <div class="modal-header premium-modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                    <i class="fa-solid fa-receipt"></i> Add New Sale
+                </h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <form action="/add_sales" class="text-center" method="POST">
-                    <select name="product_id" id="product_id" class="form-select w-50 mx-auto" required>
-                        {% for product in products %}
-                        <option value="{{product[0]}}" data-remaining="{{product[2]}}">{{product[1]}} ({{product[2]}} left)</option>
-                        {% endfor %}
-                    </select> <br>
-                    <input type="number" id="q" name="quantity" class="form-control w-50 mx-auto" placeholder="Enter/Select quantity" min="1" required> <br>
-                    <div class="text-center"><small id="remainingInfo">Remaining stock: --</small></div><br>
-                    <button type="submit" class="btn btn-primary">Proceed</button>
+            <div class="modal-body premium-modal-body">
+                <form action="/add_sales" class="product-form" method="POST">
+                    <div class="form-group mb-4">
+                        <label for="product_id" class="form-label">Product</label>
+                        <select name="product_id" id="product_id" class="form-control premium-input" required>
+                            {% for product in products %}
+                            <option value="{{product[0]}}" data-remaining="{{product[2]}}">{{product[1]}} ({{product[2]}} left)</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="q" class="form-label">Quantity</label>
+                        <input type="number" id="q" name="quantity" class="form-control premium-input" placeholder="Enter quantity" min="1" required>
+                    </div>
+                    <div class="form-group mb-4 text-center"><small id="remainingInfo" style="color: #667eea; font-weight: 600;">Remaining stock: --</small></div>
+                    <button type="submit" class="premium-submit-btn w-100">Add Sale</button>
                 </form>
-            </div>
-            <div class="modal-footer" style="background-color: grey; color: whitesmoke;">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
-<table class="display" id="myTable">
+<div class="products-table-container">
+    <table class="display premium-products-table" id="myTable">
     <thead>
         <tr>
             <th>id</th>
@@ -56,7 +67,7 @@
         {% endfor %}
     </tbody>
 </table>
-</table>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
