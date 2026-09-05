@@ -16,6 +16,29 @@ curr = connect.cursor()
 # curr.execute("select * from products;")
 # data=curr.fetchall()
 # print(data)
+def create_tables():
+    # 1. Create products table first
+    curr.execute('''
+        CREATE TABLE IF NOT EXISTS products (
+            id SERIAL PRIMARY KEY,
+            name TEXT,
+            price REAL
+        );
+    ''')
+    
+    # 2. Create sales table with product_id so your join query finds it
+    curr.execute('''
+        CREATE TABLE IF NOT EXISTS sales (
+            id SERIAL PRIMARY KEY,
+            product_id INTEGER,
+            quantity INTEGER,
+            price REAL
+        );
+    ''')
+    connect.commit()
+
+# Run this immediately after connection so tables exist
+create_tables()
 
 # # create function
 # def fetch_prods():
@@ -285,40 +308,6 @@ def get_remaining_stock(product_id):
     sales_sum = curr.fetchone()[0] or 0
     return int(stock_sum) - int(sales_sum)
 
-def create_tables():
-    # 1. Create products table first
-    curr.execute('''
-        CREATE TABLE IF NOT EXISTS products (
-            id SERIAL PRIMARY KEY,
-            name TEXT,
-            price REAL
-        );
-    ''')
-    
-    # 2. Create sales table with product_id so your join query finds it
-    curr.execute('''
-        CREATE TABLE IF NOT EXISTS sales (
-            id SERIAL PRIMARY KEY,
-            product_id INTEGER,
-            quantity INTEGER,
-            price REAL
-        );
-    ''')
-    connect.commit()
-
-# Run this immediately after connection so tables exist
-create_tables()
-
-def create_tables():
-    curr.execute('''
-        CREATE TABLE IF NOT EXISTS sales (
-            id SERIAL PRIMARY KEY,
-            -- add your other table columns here based on your app schema
-        )
-    ''')
-    connect.commit()
-
-create_tables()
 
 # def card_profit():
 #     query = 'select sum(p.selling_price-p.buying_price) as total_sales from sales as s inner join' \
