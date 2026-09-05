@@ -240,7 +240,7 @@ def check_email(email):
 
 
 def total_sales():
-    query = 'select sum(selling_price*quantity) from products inner join sales on sales.product_id=products.product_id;'
+    query = 'select sum(price*quantity) from products inner join sales on sales.product_id=products.product_id;'
     curr.execute(query)
     data = curr.fetchone()
     return data[0]
