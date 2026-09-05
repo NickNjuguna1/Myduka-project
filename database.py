@@ -27,18 +27,19 @@ def create_tables():
     curr.execute('''
         CREATE TABLE IF NOT EXISTS sales (
             id SERIAL PRIMARY KEY,
-            quantity INTEGER,
             price REAL
         );
     ''')
-    # This ensures product_id is added even if the sales table already exists
+    # Safely add columns if the table already existed without them
     curr.execute('''
         ALTER TABLE sales ADD COLUMN IF NOT EXISTS product_id INTEGER;
+    ''')
+    curr.execute('''
+        ALTER TABLE sales ADD COLUMN IF NOT EXISTS quantity INTEGER;
     ''')
     connect.commit()
 
 create_tables()
-
 # # create function
 # def fetch_prods():
 #     curr.execute("select * from products;")
