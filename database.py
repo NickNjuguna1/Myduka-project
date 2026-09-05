@@ -21,14 +21,14 @@ def create_tables():
         CREATE TABLE IF NOT EXISTS products (
             id SERIAL PRIMARY KEY,
             name TEXT,
-            price REAL
+            selling_price REAL
         );
     ''')
     curr.execute('''
         CREATE TABLE IF NOT EXISTS sales (
             id SERIAL PRIMARY KEY,
             quantity INTEGER,
-            price REAL
+            selling_price REAL
         );
     ''')
     # This ensures product_id is added even if the sales table already exists
