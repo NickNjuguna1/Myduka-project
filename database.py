@@ -5,6 +5,7 @@ import psycopg2
 import os
 import psycopg2
 
+# Reads the DATABASE_URL you configured on Render, falling back to localhost for local testing
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
 connect = psycopg2.connect(DATABASE_URL)
