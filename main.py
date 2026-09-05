@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from database import fetch_data, insert_products, insert_sales, insert_stock, product_profit, products_sales, day_sales, daily_profits, insert_users, check_email, total_sales, delete_product as db_delete_product, update_product, fetch_product, get_remaining_stock, total_profits, total_stocks, highest_profit_product
 from flask_bcrypt import Bcrypt
 
+import os
 # instance of the Flask class
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
