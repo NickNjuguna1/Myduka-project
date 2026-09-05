@@ -17,7 +17,6 @@ curr = connect.cursor()
 # data=curr.fetchall()
 # print(data)
 def create_tables():
-    # 1. Create products table first
     curr.execute('''
         CREATE TABLE IF NOT EXISTS products (
             id SERIAL PRIMARY KEY,
@@ -25,19 +24,19 @@ def create_tables():
             price REAL
         );
     ''')
-    
-    # 2. Create sales table with product_id so your join query finds it
     curr.execute('''
         CREATE TABLE IF NOT EXISTS sales (
             id SERIAL PRIMARY KEY,
-            product_id INTEGER,
             quantity INTEGER,
             price REAL
         );
     ''')
+    # This ensures product_id is added even if the sales table already exists
+    curr.execute('''
+        ALTER TABLE sales ADD COLUMN IF NOT EXISTS product_id INTEGER;
+    ''')
     connect.commit()
 
-# Run this immediately after connection so tables exist
 create_tables()
 
 # # create function
