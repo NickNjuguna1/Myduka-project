@@ -246,7 +246,7 @@ def update_product(values):
 
 
 def get_remaining_stock(product_id):
-    # used COALESCE to get 0 instead of craashing when no stock exist
+    # used COALESCE to get 0 instead of crashing when no stock exists
     query = 'select COALESCE(sum(stock_quantity),0) from stock where product_id=%s;'
     curr.execute(query, (product_id,))
     stock_sum = curr.fetchone()[0] or 0
@@ -254,6 +254,17 @@ def get_remaining_stock(product_id):
     curr.execute(query2, (product_id,))
     sales_sum = curr.fetchone()[0] or 0
     return int(stock_sum) - int(sales_sum)
+
+def create_tables():
+    curr.execute('''
+        CREATE TABLE IF NOT EXISTS sales (
+            id SERIAL PRIMARY KEY,
+            -- add your other table columns here based on your app schema
+        )
+    ''')
+    connect.commit()
+
+create_tables()
 
 # def card_profit():
 #     query = 'select sum(p.selling_price-p.buying_price) as total_sales from sales as s inner join' \
