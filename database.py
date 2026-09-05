@@ -153,7 +153,7 @@ def product_profit():
     return profit
 
 
-myprofits = product_profit()
+# myprofits = product_profit()
 # print( f'My product profit is {myprofits}')
 
 
@@ -284,6 +284,30 @@ def get_remaining_stock(product_id):
     curr.execute(query2, (product_id,))
     sales_sum = curr.fetchone()[0] or 0
     return int(stock_sum) - int(sales_sum)
+
+def create_tables():
+    # 1. Create products table first
+    curr.execute('''
+        CREATE TABLE IF NOT EXISTS products (
+            id SERIAL PRIMARY KEY,
+            name TEXT,
+            price REAL
+        );
+    ''')
+    
+    # 2. Create sales table with product_id so your join query finds it
+    curr.execute('''
+        CREATE TABLE IF NOT EXISTS sales (
+            id SERIAL PRIMARY KEY,
+            product_id INTEGER,
+            quantity INTEGER,
+            price REAL
+        );
+    ''')
+    connect.commit()
+
+# Run this immediately after connection so tables exist
+create_tables()
 
 def create_tables():
     curr.execute('''
