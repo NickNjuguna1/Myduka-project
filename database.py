@@ -67,7 +67,18 @@ def fetch_data(table_name):
 # stock = fetch_data('stock')
 # print('My stock')
 # print(stock)
-sales = fetch_data('sales')
+
+def init_db():
+    curr.execute('''
+        CREATE TABLE IF NOT EXISTS sales (
+            id SERIAL PRIMARY KEY
+        )
+    ''')
+    connect.commit()
+
+init_db()
+
+# sales = fetch_data('sales')
 # print('My Sales')
 # print(sales)
 
