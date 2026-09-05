@@ -21,14 +21,14 @@ def create_tables():
         CREATE TABLE IF NOT EXISTS products (
             id SERIAL PRIMARY KEY,
             name TEXT,
-            selling_price REAL
+            price REAL
         );
     ''')
     curr.execute('''
         CREATE TABLE IF NOT EXISTS sales (
             id SERIAL PRIMARY KEY,
             quantity INTEGER,
-            selling_price REAL
+            price REAL
         );
     ''')
     # This ensures product_id is added even if the sales table already exists
@@ -180,7 +180,7 @@ def product_profit():
 
 
 def sales_sum():
-    query = 'select sum(products.selling_price*sales.quantity) ' \
+    query = 'select sum(products.price*sales.quantity) ' \
         'from sales inner join products on sales.product_id=products.id;'
     curr.execute(query)
     sum = curr.fetchall()
