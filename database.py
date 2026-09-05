@@ -181,7 +181,7 @@ def product_profit():
 
 def sales_sum():
     query = 'select sum(products.selling_price*sales.quantity) ' \
-        'from sales inner join products on sales.product_id=products.product_id;'
+        'from sales inner join products on sales.product_id=products.id;'
     curr.execute(query)
     sum = curr.fetchall()
     return sum
