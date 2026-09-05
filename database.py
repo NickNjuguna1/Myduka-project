@@ -2,13 +2,13 @@ from multiprocessing import connection
 from multiprocessing.connection import Connection
 import psycopg2
 
-connect = psycopg2.connect(
-    host="localhost",
-    user="postgres",
-    dbname="myduka_db",
-    port=5432,
-    password="Nick8957#"
-)
+import os
+import psycopg2
+
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+connect = psycopg2.connect(DATABASE_URL)
+curr = connect.cursor()
 
 curr = connect.cursor()
 #  Fetch data by first executing, then fetch
