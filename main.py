@@ -257,4 +257,6 @@ def edit_product(product_id):
     product = fetch_product(product_id)
     return render_template('edit_product.html', product=product)
 
-app.run(debug=True)
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
