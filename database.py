@@ -178,8 +178,8 @@ def insert_stock(values):
 
 # Profit per Product(profit=(selling price - buying price)*quantity)
 def product_profit():
-    query = 'select p.name, p.product_id, sum((selling_price-buying_price)*s.quantity) as profit ' \
-        'from sales as s inner join products as p on s.product_id = p.product_id group by p.name, p.product_id'
+    query = 'select p.name, p.id, sum((selling_price-buying_price)*s.quantity) as profit ' \
+            'from sales as s inner join products as p on s.product_id = p.id group by p.name, p.id'
     curr.execute(query)
     profit = curr.fetchall()
     return profit
