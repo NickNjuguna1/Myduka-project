@@ -130,26 +130,6 @@ new_product = ('Mango', 20, 40)
 # print('My Products')
 # print(products)
 
-def create_tables():
-    curr.execute('''
-        CREATE TABLE IF NOT EXISTS products (
-            id SERIAL PRIMARY KEY,
-            name TEXT,
-            price REAL
-            -- add your other columns matching your app schema
-        );
-    ''')
-    curr.execute('''
-        CREATE TABLE IF NOT EXISTS sales (
-            id SERIAL PRIMARY KEY
-            -- add your other columns matching your app schema
-        );
-    ''')
-    connect.commit()
-
-create_tables()
-
-
 def insert_sales(values):
     query = 'insert into sales(product_id, quantity, created_at) values (%s, %s, now());'
     curr.execute(query, values)
