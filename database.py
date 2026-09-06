@@ -321,18 +321,6 @@ def get_remaining_stock(product_id):
     sales_sum = curr.fetchone()[0] or 0
     return int(stock_sum) - int(sales_sum)
 
-# def execute_query(query, params=None):
-    # try:
-        # if params:
-           #  curr.execute(query, params)
-        # else:
-            curr.execute(query)
-        connect.commit()
-   # except Exception as e:
-        connect.rollback()
-        raise e
-
-
 # def card_profit():
 #     query = 'select sum(p.selling_price-p.buying_price) as total_sales from sales as s inner join' \
 #     ' products as p on s.product_id=p.product_id;'
