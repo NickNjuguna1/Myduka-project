@@ -228,7 +228,7 @@ def daily_profits():
 
 
 def insert_users(user_values):
-    query = "insert into users (full_name, email, password) values(%s,%s,%s);"
+    query = "insert into users (username, email, password) values(%s,%s,%s);"
     curr.execute(query, user_values)
     connect.commit()
 
