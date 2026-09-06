@@ -20,14 +20,24 @@ def create_tables():
     curr.execute('''
         CREATE TABLE IF NOT EXISTS products (
             id SERIAL PRIMARY KEY,
-            name TEXT,
-            price REAL
-        );
-    ''')
+            name VARCHAR(255) NOT NULL,
+            selling_price REAL NOT NULL,
+            buying_price REAL NOT NULL
+    );
+''')
     curr.execute('''
         CREATE TABLE IF NOT EXISTS sales (
             id SERIAL PRIMARY KEY,
-            price REAL
+            product_id INT REFERENCES products(id),
+            quantity INT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+    ''')
+    curr.execute('''
+        CREATE TABLE IF NOT EXISTS stock (
+            id SERIAL PRIMARY KEY,
+            product_id INT REFERENCES products(id),
+            stock_quantity INT NOT NULL DEFAULT 0
         );
     ''')
     # Safely add columns if the table already existed without them
@@ -158,15 +168,13 @@ def insert_stock(values):
 
 # Profit per Product(profit=(selling price - buying price)*quantity)
 def product_profit():
-    query = 'select p.name, p.id, sum((p.selling_price - p.buying_price)*s.quantity) as profit ' \
-            'from sales as s inner join products as p on s.product_id = p.id group by p.name, p.id'
-    try:
-        curr.execute(query)
-        profit = curr.fetchall()
-        return profit
-    except Exception as e:
-        connect.rollback()
-        raise e
+    curr.execute('''
+        SELECT p.name, p.id, SUM((p.selling_price - p.buying_price) * s.quantity) AS total_profit
+        FROM products p
+        JOIN sales s ON p.id = s.product_id
+        GROUP BY p.id, p.name;
+    ''')
+    return curr.fetchall()
 
 
 # myprofits = product_profit()
