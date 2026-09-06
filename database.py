@@ -189,7 +189,7 @@ def sales_sum():
     return sum
 
 
-def def products_sales():
+def products_sales():
     query = '''
         SELECT p.name, s.quantity, s.created_at 
         FROM sales s 
