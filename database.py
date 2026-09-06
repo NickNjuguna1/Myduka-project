@@ -40,9 +40,9 @@ def create_tables():
             stock_quantity INT NOT NULL DEFAULT 0
         );
     ''')
-  curr.execute('''
-    ALTER TABLE products ADD COLUMN IF NOT EXISTS selling_price REAL;
-    ALTER TABLE products ADD COLUMN IF NOT EXISTS buying_price REAL;
+    curr.execute('''
+        ALTER TABLE products ADD COLUMN IF NOT EXISTS selling_price REAL;
+        ALTER TABLE products ADD COLUMN IF NOT EXISTS buying_price REAL;
 ''')
 connect.commit()
 
