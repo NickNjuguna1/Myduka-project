@@ -200,12 +200,7 @@ def products_sales():
         return curr.fetchall()
     except Exception as e:
         connect.rollback()
-        raise e:
-    query = 'select p.name, sum(p.selling_price*s.quantity) as total_sales from sales ' \
-        'as s inner join products as p on s.product_id=p.product_id group by p.name, p.product_id;'
-    curr.execute(query)
-    sale = curr.fetchall()
-    return sale
+        raise e
 
 # Sales per Day Function
 
