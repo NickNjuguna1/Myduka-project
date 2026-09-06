@@ -21,7 +21,7 @@ def create_tables():
         CREATE TABLE IF NOT EXISTS products (
             id SERIAL PRIMARY KEY,
             name TEXT,
-            price REAL
+            price REAL,
         );
     ''')
     curr.execute('''
@@ -38,6 +38,15 @@ def create_tables():
         ALTER TABLE sales ADD COLUMN IF NOT EXISTS quantity INTEGER;
     ''')
     connect.commit()
+
+curr.execute('''
+    CREATE TABLE IF NOT EXISTS users (
+        id SERIAL PRIMARY KEY,
+        username TEXT,
+        email TEXT UNIQUE,
+        password TEXT
+    );
+''')
 
 create_tables()
 # # create function
