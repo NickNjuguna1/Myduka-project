@@ -95,9 +95,12 @@ create_tables()
 
 
 def fetch_data(table_name):
-    curr.execute(f'select * from {table_name}')
-    data = curr.fetchall()
-    return data
+    try:
+        curr.execute(f'SELECT * FROM {table_name}')
+        return curr.fetchall()
+    except Exception as e:
+        connect.rollback()
+        raise e
 
 
 # products = fetch_data('products')
