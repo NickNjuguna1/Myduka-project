@@ -7,6 +7,7 @@ import os
 # instance of the Flask class
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
+create_tables()
 
 app.secret_key = '1234569'
 
