@@ -40,14 +40,11 @@ def create_tables():
             stock_quantity INT NOT NULL DEFAULT 0
         );
     ''')
-    # Safely add columns if the table already existed without them
-    curr.execute('''
-        ALTER TABLE sales ADD COLUMN IF NOT EXISTS product_id INTEGER;
-    ''')
-    curr.execute('''
-        ALTER TABLE sales ADD COLUMN IF NOT EXISTS quantity INTEGER;
-    ''')
-    connect.commit()
+  curr.execute('''
+    ALTER TABLE products ADD COLUMN IF NOT EXISTS selling_price REAL;
+    ALTER TABLE products ADD COLUMN IF NOT EXISTS buying_price REAL;
+''')
+connect.commit()
 
 curr.execute('''
     CREATE TABLE IF NOT EXISTS users (
