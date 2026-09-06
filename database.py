@@ -189,7 +189,18 @@ def sales_sum():
     return sum
 
 
-def products_sales():
+def def products_sales():
+    query = '''
+        SELECT p.name, s.quantity, s.created_at 
+        FROM sales s 
+        INNER JOIN products p ON s.product_id = p.id
+    '''
+    try:
+        curr.execute(query)
+        return curr.fetchall()
+    except Exception as e:
+        connect.rollback()
+        raise e:
     query = 'select p.name, sum(p.selling_price*s.quantity) as total_sales from sales ' \
         'as s inner join products as p on s.product_id=p.product_id group by p.name, p.product_id;'
     curr.execute(query)
@@ -197,7 +208,6 @@ def products_sales():
     return sale
 
 # Sales per Day Function
-
 
 def day_sales():
     query = 'select date(s.created_at), ' \
