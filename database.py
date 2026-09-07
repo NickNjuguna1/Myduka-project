@@ -207,7 +207,7 @@ def products_sales():
 def day_sales():
     query = 'select date(s.created_at), ' \
         'sum(p.selling_price*s.quantity) as total_sales from sales as s inner join' \
-        ' products as p on s.product_id=p.product_id group by date(s.created_at);'
+        ' products as p on s.product_id=p.id group by date(s.created_at);'
     curr.execute(query)
     day_sale = curr.fetchall()
     return day_sale
