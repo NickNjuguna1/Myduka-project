@@ -266,7 +266,7 @@ print(total_sales())
 
 def total_profits():
     query = 'select sum((selling_price-buying_price)*quantity) from products inner join sales on sales.product_id=products.id;'
-     try:
+    try:
         curr.execute(query)
         return curr.fetchall()  # or fetchone(), whichever it currently uses
     except Exception as e:
