@@ -219,9 +219,13 @@ def daily_profits():
     query = 'select date(s.created_at), ' \
         'sum(p.selling_price-p.buying_price) as total_sales from sales as s inner join' \
         ' products as p on s.product_id=p.id group by date(s.created_at);'
-    curr.execute(query)
-    day_profit = curr.fetchall()
-    return day_profit
+    try:
+        curr.execute(query)
+        day_profit = curr.fetchall()
+        return day_profit
+    except Exception as e:
+        connect.rollback()
+        raise e
 
 
 def insert_users(user_values):
