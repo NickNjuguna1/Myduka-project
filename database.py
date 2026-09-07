@@ -265,7 +265,7 @@ print(total_sales())
 
 
 def total_profits():
-    query = 'select sum((selling_price-buying_price)*quantity) from products inner join sales on sales.product_id=products.product_id;'
+    query = 'select sum((selling_price-buying_price)*quantity) from products inner join sales on sales.product_id=products.id;'
     curr.execute(query)
     data = curr.fetchone()
     return data[0]
