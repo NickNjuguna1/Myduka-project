@@ -237,10 +237,13 @@ my_sum = sales_sum()
 
 
 def check_email(email):
-    query = 'select * from users where email=%s'
-    curr.execute(query, (email,))
-    data = curr.fetchone()
-    return data
+    query = "SELECT * FROM users WHERE email = %s"
+    try:
+        curr.execute(query, (email,))
+        return curr.fetchone()
+    except Exception as e:
+        connect.rollback()
+        raise e
 
 # Sales card on Dashboard
 
