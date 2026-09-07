@@ -218,7 +218,7 @@ def day_sales():
 def daily_profits():
     query = 'select date(s.created_at), ' \
         'sum(p.selling_price-p.buying_price) as total_sales from sales as s inner join' \
-        ' products as p on s.product_id=p.product_id group by date(s.created_at);'
+        ' products as p on s.product_id=p.id group by date(s.created_at);'
     curr.execute(query)
     day_profit = curr.fetchall()
     return day_profit
@@ -279,8 +279,8 @@ def total_stocks():
 
 
 def highest_profit_product():
-    query = 'select p.name, p.product_id, sum((selling_price-buying_price)*s.quantity) ' \
-        'as profit from sales s inner join products p on s.product_id = p.product_id group by p.name, p.product_id order by profit desc limit 1;'
+    query = 'select p.name, p.id, sum((selling_price-buying_price)*s.quantity) ' \
+        'as profit from sales s inner join products p on s.product_id = p.id group by p.name, p.id order by profit desc limit 1;'
     curr.execute(query)
     data = curr.fetchone()
     return data[0]
@@ -319,7 +319,7 @@ def get_remaining_stock(product_id):
 
 # def card_profit():
 #     query = 'select sum(p.selling_price-p.buying_price) as total_sales from sales as s inner join' \
-#     ' products as p on s.product_id=p.product_id;'
+#     ' products as p on s.product_id=p.id;'
 #     curr.execute(query)
 #     day_profits = curr.fetchall()
 #     return day_profits
