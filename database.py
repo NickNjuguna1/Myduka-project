@@ -2,20 +2,60 @@ from multiprocessing import connection
 from multiprocessing.connection import Connection
 import psycopg2
 
-connect = psycopg2.connect(
-    host="localhost",
-    user="postgres",
-    dbname="myduka_db",
-    port=5432,
-    password="Nick8957#"
-)
+import os
+import psycopg2
+
+# Reads the DATABASE_URL you configured on Render, falling back to localhost for local testing
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+connect = psycopg2.connect(DATABASE_URL)
+curr = connect.cursor()
 
 curr = connect.cursor()
 # Fetch data by first executing, then fetch
 # curr.execute("select * from products;")
 # data=curr.fetchall()
 # print(data)
+def create_tables():
+    curr.execute('''
+        CREATE TABLE IF NOT EXISTS products (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            selling_price REAL NOT NULL,
+            buying_price REAL NOT NULL
+    );
+''')
+    curr.execute('''
+        CREATE TABLE IF NOT EXISTS sales (
+            id SERIAL PRIMARY KEY,
+            product_id INT REFERENCES products(id),
+            quantity INT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+    ''')
+    curr.execute('''
+        CREATE TABLE IF NOT EXISTS stock (
+            id SERIAL PRIMARY KEY,
+            product_id INT REFERENCES products(id),
+            stock_quantity INT NOT NULL DEFAULT 0
+        );
+    ''')
+    curr.execute('''
+        ALTER TABLE products ADD COLUMN IF NOT EXISTS selling_price REAL;
+        ALTER TABLE products ADD COLUMN IF NOT EXISTS buying_price REAL;
+''')
+connect.commit()
 
+curr.execute('''
+    CREATE TABLE IF NOT EXISTS users (
+        id SERIAL PRIMARY KEY,
+        username TEXT,
+        email TEXT UNIQUE,
+        password TEXT
+    );
+''')
+
+create_tables()
 # # create function
 # def fetch_prods():
 #     curr.execute("select * from products;")
@@ -55,9 +95,12 @@ curr = connect.cursor()
 
 
 def fetch_data(table_name):
-    curr.execute(f'select * from {table_name}')
-    data = curr.fetchall()
-    return data
+    try:
+        curr.execute(f'SELECT * FROM {table_name}')
+        return curr.fetchall()
+    except Exception as e:
+        connect.rollback()
+        raise e
 
 
 # products = fetch_data('products')
@@ -66,7 +109,18 @@ def fetch_data(table_name):
 # stock = fetch_data('stock')
 # print('My stock')
 # print(stock)
-sales = fetch_data('sales')
+
+def init_db():
+    curr.execute('''
+        CREATE TABLE IF NOT EXISTS sales (
+            id SERIAL PRIMARY KEY
+        )
+    ''')
+    connect.commit()
+
+init_db()
+
+# sales = fetch_data('sales')
 # print('My Sales')
 # print(sales)
 
@@ -82,10 +136,9 @@ def insert_products(values):
 new_product = ('Mango', 20, 40)
 # insert_products(new_product)
 
-products = fetch_data('products')
+# products = fetch_data('products')
 # print('My Products')
 # print(products)
-
 
 def insert_sales(values):
     query = 'insert into sales(product_id, quantity, created_at) values (%s, %s, now());'
@@ -122,7 +175,7 @@ def product_profit():
     return profit
 
 
-myprofits = product_profit()
+# myprofits = product_profit()
 # print( f'My product profit is {myprofits}')
 
 
@@ -142,7 +195,6 @@ def products_sales():
     return sale
 
 # Sales per Day Function
-
 
 def day_sales():
     query = 'select date(s.created_at), ' \
@@ -165,7 +217,7 @@ def daily_profits():
 
 
 def insert_users(user_values):
-    query = "insert into users (full_name, email, password) values(%s,%s,%s);"
+    query = "insert into users (username, email, password) values(%s,%s,%s);"
     curr.execute(query, user_values)
     connect.commit()
 
@@ -177,10 +229,13 @@ my_sum = sales_sum()
 
 
 def check_email(email):
-    query = 'select * from users where email=%s'
-    curr.execute(query, (email,))
-    data = curr.fetchone()
-    return data
+    query = "SELECT * FROM users WHERE email = %s"
+    try:
+        curr.execute(query, (email,))
+        return curr.fetchone()
+    except Exception as e:
+        connect.rollback()
+        raise e
 
 # Sales card on Dashboard
 
@@ -245,7 +300,7 @@ def update_product(values):
 
 
 def get_remaining_stock(product_id):
-    # used COALESCE to get 0 instead of craashing when no stock exist
+    # used COALESCE to get 0 instead of crashing when no stock exists
     query = 'select COALESCE(sum(stock_quantity),0) from stock where product_id=%s;'
     curr.execute(query, (product_id,))
     stock_sum = curr.fetchone()[0] or 0
@@ -256,7 +311,7 @@ def get_remaining_stock(product_id):
 
 # def card_profit():
 #     query = 'select sum(p.selling_price-p.buying_price) as total_sales from sales as s inner join' \
-#     ' products as p on s.product_id=p.product_id;'
+#     ' products as p on s.product_id=p.id;'
 #     curr.execute(query)
 #     day_profits = curr.fetchall()
 #     return day_profits
