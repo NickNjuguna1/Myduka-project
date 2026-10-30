@@ -77,7 +77,13 @@ def add_sales():
             flash(f'Not enough stock (only {remaining} remaining)', 'error')
             return redirect(url_for('sales'))
 
+        product = fetch_product(product_id)
         insert_sales((product_id, quantity))
+        session['sale_receipt'] = {
+            'product_name': product[1] if product else product_id,
+            'quantity': quantity,
+            'created_at': datetime.now().strftime('%d %B %Y')
+        }
         flash('New Sale Added', 'success')
     return redirect(url_for('sales'))
 
@@ -85,6 +91,7 @@ def add_sales():
 @app.route('/sales')
 def sales():
     if 'email' in session:
+        sale_receipt = session.pop('sale_receipt', None)
         sales = fetch_data('sales')
         # fetch products and attach remaining stock
         products_raw = fetch_data('products')
@@ -96,28 +103,36 @@ def sales():
     else:
         flash('Log in to access Sales', 'error')
         return redirect(url_for('login'))
-    return render_template('sales.html', my_sales=sales, products=products)
+    return render_template('sales.html', my_sales=sales, products=products, sale_receipt=sale_receipt)
 
 # Stock route
 @app.route('/add_stock', methods=['POST'])
 def add_stock():
-    if request.method == 'POST':
-        product_stock = request.form['product_id']
-        quantity = request.form['stock_quantity']
-        new_stock = (product_stock, quantity)
-        insert_stock(new_stock)
-        flash('New Stock Added', 'success')
+    try:
+        product_stock = int(request.form['product_id'])
+        quantity = int(request.form['stock_quantity'])
+    except (TypeError, ValueError):
+        flash('Select a valid product and enter a whole-number quantity', 'error')
+        return redirect(url_for('stock'))
+
+    if quantity <= 0:
+        flash('Stock quantity must be at least 1', 'error')
+        return redirect(url_for('stock'))
+
+    insert_stock((product_stock, quantity))
+    flash('New Stock Added', 'success')
     return redirect(url_for('stock'))
 
 @app.route('/stock')
 def stock():
     if 'email' in session:
         stock = fetch_data('stock')
+        products = fetch_data('products')
     else:
         flash('Log in to view Stock', 'error')
         return redirect(url_for('login'))
 
-    return render_template('stock.html', my_stock=stock)
+    return render_template('stock.html', my_stock=stock, products=products)
 
 
 @app.route('/dashboard')

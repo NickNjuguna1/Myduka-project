@@ -27,9 +27,13 @@
             <div class="modal-body premium-modal-body">
                 <form action="/add_stock" class="product-form" method="POST">
                     <div class="form-group mb-4">
-                        <label for="prod_id" class="form-label">Product ID</label>
-                        <input type="number" id="prod_id" name="product_id" class="form-control premium-input"
-                            placeholder="Enter product ID" required>
+                        <label for="prod_id" class="form-label">Product</label>
+                        <select id="prod_id" name="product_id" class="form-control premium-input" required>
+                            <option value="" selected disabled>Select a product</option>
+                            {% for product in products %}
+                            <option value="{{ product[0] }}">{{ product[1] }} (ID {{ product[0] }})</option>
+                            {% endfor %}
+                        </select>
                     </div>
                     <div class="form-group mb-4">
                         <label for="stockq" class="form-label">Stock Quantity</label>
@@ -46,7 +50,7 @@
             <thead>
                 <tr>
                     <th>id</th>
-                    <th>Product id</th>
+                    <th>Product</th>
                     <th>Stock quantity</th>
                 </tr>
             </thead>
@@ -54,7 +58,15 @@
                 {% for stock in my_stock %}
                 <tr>
                     <td>{{stock[0]}}</td>
-                    <td>{{stock[1]}}</td>
+                    <td>
+                        {% set product_name = namespace(value=stock[1]) %}
+                        {% for product in products %}
+                        {% if product[0] == stock[1] %}
+                        {% set product_name.value = product[1] %}
+                        {% endif %}
+                        {% endfor %}
+                        {{ product_name.value }}
+                    </td>
                     <td>{{stock[2]}}</td>
                 </tr>
                 {% endfor %}
